@@ -14,12 +14,23 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Toast from 'react-native-toast-message';
 
-const showToast = product => {
+const showToast = (product, type = 'success') => {
+  let text =
+    type === 'success' ? `Added ${product} !` : `Could not add ${product} !`;
+
+  let duration = type === 'success' ? 1000 : 1500;
+
   Toast.show({
-    type: 'success',
-    text1: `Added ${product} !`,
-    visibilityTime: 1000,
+    type: type,
+    text1: text,
+    visibilityTime: duration,
   });
+};
+
+const emptyProduct = {
+  name: '',
+  expDate: null,
+  addedOn: null,
 };
 
 const styles = StyleSheet.create({
@@ -46,15 +57,23 @@ const AddProductForm = () => {
   const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
-  const handleCHange = e => {
+  const handleDateChange = e => {
     setExpDate(new Date(e.nativeEvent.timestamp));
   };
 
   const addToFridge = () => {
-    console.log('ADD TO FRIDGE');
-    console.log(productName);
-    showToast(productName);
+    let product = {
+      ...emptyProduct,
+      name: productName,
+      expDate: expDate,
+      expDateTs: new Date(expDate).getTime(),
+      addedOn: new Date().getTime(),
+    };
+
+    showToast(productName, 'success');
     setProductName('');
+
+    console.log('Adding product:', {product});
   };
 
   return (
@@ -71,7 +90,7 @@ const AddProductForm = () => {
         display="spinner"
         mode="date"
         value={expDate}
-        onChange={handleCHange}
+        onChange={handleDateChange}
       />
       <CustomButton
         title={'Add to Fridge'}
