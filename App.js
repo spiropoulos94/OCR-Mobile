@@ -4,8 +4,24 @@ import * as React from 'react';
 import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import TextRecognition from '@react-native-ml-kit/text-recognition';
 
 function HomeScreen({navigation}) {
+  const getText = async imgUri => {
+    const result = await TextRecognition.recognize(imgUri);
+    console.log('Recognized text:', result.text);
+    for (let block of result.blocks) {
+      console.log('Block text:', block.text);
+      console.log('Block frame:', block.frame);
+
+      for (let line of block.lines) {
+        console.log('Line text:', line.text);
+        console.log('Line frame:', line.frame);
+      }
+    }
+    return result;
+  };
+
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Home Screen</Text>
@@ -13,9 +29,19 @@ function HomeScreen({navigation}) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <Button
+        title="Extract text"
+        onPress={() =>
+          getText('file:///Users/nikosspiropoulos/Desktop/Image.jpeg')
+        }
+      />
     </View>
   );
 }
+
+const textLine = ({content}) => {
+  return <Text>{content}</Text>;
+};
 
 function DetailsScreen({navigation}) {
   return (
