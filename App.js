@@ -3,80 +3,57 @@
 import * as React from 'react';
 import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import TextRecognition from '@react-native-ml-kit/text-recognition';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
+import SignIn from './tabs/auth/SignIn';
+import SignUp from './tabs/auth/SignUp';
 
-function HomeScreen({navigation}) {
-  const getText = async imgUri => {
-    const result = await TextRecognition.recognize(imgUri);
-    console.log('Recognized text:', result.text);
-    for (let block of result.blocks) {
-      console.log('Block text:', block.text);
-      console.log('Block frame:', block.frame);
+const Tab = createBottomTabNavigator();
 
-      for (let line of block.lines) {
-        console.log('Line text:', line.text);
-        console.log('Line frame:', line.frame);
-      }
-    }
-    return result;
-  };
-
+const HomeScreen = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-      <Button
-        title="Extract text"
-        onPress={() =>
-          getText('file:///Users/nikosspiropoulos/Desktop/Image.jpeg')
-        }
-      />
     </View>
   );
-}
-
-const textLine = ({content}) => {
-  return <Text>{content}</Text>;
+};
+const FridgeScreen = () => {
+  return (
+    <View>
+      <Text>Fridge Screen</Text>
+    </View>
+  );
+};
+const AddToFridgeScreen = () => {
+  return (
+    <View>
+      <Text>Add To Fridge Screen</Text>
+    </View>
+  );
 };
 
-function DetailsScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-    </View>
-  );
-}
-function ProfileScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
 function App() {
+  const isSignedIn = true;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Overview'}}
-        />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        {isSignedIn ? (
+          <>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Fridge" component={FridgeScreen} />
+            <Tab.Screen name="Add to Fridge" component={AddToFridgeScreen} />
+          </>
+        ) : (
+          <>
+            <Tab.Screen name="Log In" component={SignIn} />
+            <Tab.Screen name="Sign Up" component={SignUp} />
+          </>
+        )}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
