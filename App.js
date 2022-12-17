@@ -11,6 +11,8 @@ import {SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
 import SignIn from './tabs/auth/SignIn';
 import SignUp from './tabs/auth/SignUp';
 
+import AddToFridgeScreen from './tabs/AddToFridge';
+
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
@@ -24,13 +26,6 @@ const FridgeScreen = () => {
   return (
     <View>
       <Text>Fridge Screen</Text>
-    </View>
-  );
-};
-const AddToFridgeScreen = () => {
-  return (
-    <View>
-      <Text>Add To Fridge Screen</Text>
     </View>
   );
 };
