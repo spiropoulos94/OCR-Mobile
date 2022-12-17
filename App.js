@@ -1,6 +1,6 @@
 // In App.js in a new project
 
-import * as React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -12,6 +12,7 @@ import SignIn from './tabs/auth/SignIn';
 import SignUp from './tabs/auth/SignUp';
 
 import AddToFridgeScreen from './tabs/AddToFridge';
+import FridgeScreen from './tabs/FridgeScreen';
 import Toast from 'react-native-toast-message';
 
 const Tab = createBottomTabNavigator();
@@ -23,16 +24,11 @@ const HomeScreen = () => {
     </View>
   );
 };
-const FridgeScreen = () => {
-  return (
-    <View>
-      <Text>Fridge Screen</Text>
-    </View>
-  );
-};
 
 function App() {
   const isSignedIn = true;
+
+  const [products, setProducts] = useState([]);
 
   return (
     <NavigationContainer>
@@ -40,8 +36,15 @@ function App() {
         {isSignedIn ? (
           <>
             {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
-            <Tab.Screen name="Fridge" component={FridgeScreen} />
-            <Tab.Screen name="Add to Fridge" component={AddToFridgeScreen} />
+            <Tab.Screen name="Fridge">
+              {() => (
+                <FridgeScreen products={products} setProducts={setProducts} />
+              )}
+            </Tab.Screen>
+            {/* <Tab.Screen name="Add to Fridge" component={AddToFridgeScreen} /> */}
+            <Tab.Screen name="Add to Fridge">
+              {() => <AddToFridgeScreen setProducts={setProducts} />}
+            </Tab.Screen>
           </>
         ) : (
           <>

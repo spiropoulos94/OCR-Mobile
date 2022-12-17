@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddProductForm = () => {
+const AddProductForm = ({setProducts, products}) => {
   const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
@@ -74,6 +74,7 @@ const AddProductForm = () => {
     setProductName('');
 
     console.log('Adding product:', {product});
+    setProducts(oldProducts => [...oldProducts, product]);
   };
 
   return (
