@@ -12,6 +12,7 @@ import SignIn from './tabs/auth/SignIn';
 import SignUp from './tabs/auth/SignUp';
 
 import AddToFridgeScreen from './tabs/AddToFridge';
+import Toast from 'react-native-toast-message';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,6 +50,7 @@ function App() {
           </>
         )}
       </Tab.Navigator>
+      <Toast />
     </NavigationContainer>
   );
 }

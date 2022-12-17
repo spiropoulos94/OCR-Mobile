@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
-import {pageStyles} from '../styles/pageStyles';
+import {View, Text, ScrollView, TextInput, StyleSheet} from 'react-native';
+
+import AddProductForm from '../components/AddProductForm';
 
 const AddToFridgeScreen = () => {
-  console.log('ffbnasfasfas');
   return (
-    <ScrollView style={pageStyles.containerScroll}>
-      <Text>Add To Fridge Screen</Text>
+    <ScrollView>
+      <AddProductForm />
     </ScrollView>
   );
 };
