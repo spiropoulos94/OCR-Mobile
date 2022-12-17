@@ -39,7 +39,7 @@ function App() {
       <Tab.Navigator>
         {isSignedIn ? (
           <>
-            <Tab.Screen name="Home" component={HomeScreen} />
+            {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
             <Tab.Screen name="Fridge" component={FridgeScreen} />
             <Tab.Screen name="Add to Fridge" component={AddToFridgeScreen} />
           </>

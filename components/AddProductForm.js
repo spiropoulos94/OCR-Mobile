@@ -17,8 +17,8 @@ import Toast from 'react-native-toast-message';
 const showToast = product => {
   Toast.show({
     type: 'success',
-    text1: `Added ${product}`,
-    visibilityTime: 800,
+    text1: `Added ${product} !`,
+    visibilityTime: 1000,
   });
 };
 
@@ -30,10 +30,11 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   input: {
-    height: 40,
+    // height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
+    borderBottomWidth: 1,
+    fontSize: 20,
   },
   inputLabel: {
     marginLeft: 10,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 const AddProductForm = () => {
-  const [productName, setProductName] = useState('Useless Text');
+  const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
   const handleCHange = e => {
@@ -58,11 +59,12 @@ const AddProductForm = () => {
 
   return (
     <View style={styles.form}>
-      <Text style={styles.inputLabel}>Product name </Text>
+      {/* <Text style={styles.inputLabel}>Product name </Text> */}
       <TextInput
         style={styles.input}
         onChangeText={setProductName}
         value={productName}
+        placeholder="product name"
       />
       <Text style={styles.inputLabel}>Exp Date </Text>
       <DateTimePicker
