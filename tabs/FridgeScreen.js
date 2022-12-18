@@ -4,6 +4,7 @@ import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 import {
   convertTimestampToDate,
   formatDistanceBetweenDates,
+  getExpStatusFromDate,
 } from '../utils/date';
 
 const styles = StyleSheet.create({
@@ -47,11 +48,20 @@ const styles = StyleSheet.create({
 });
 
 const ProductCard = ({product}) => {
+  let status = getExpStatusFromDate(product.expDateTs);
+
+  console.log({status});
+
   return (
     <View style={styles.productCard}>
       <View style={styles.productCardTop}>
         <Text style={styles.productTitle}>{product.name}</Text>
-        <View style={styles.expStatus} />
+        <View
+          style={[
+            styles.expStatus,
+            {backgroundColor: getExpStatusFromDate(product.expDateTs)},
+          ]}
+        />
       </View>
       <View style={styles.productCardBottom}>
         <Text style={styles.expDate}>

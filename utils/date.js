@@ -1,4 +1,4 @@
-import {formatDistance} from 'date-fns';
+import {formatDistance, differenceInCalendarDays} from 'date-fns';
 
 export const convertTimestampToDate = ts => {
   let dateFormat = new Date(ts);
@@ -15,4 +15,20 @@ export const convertTimestampToDate = ts => {
 
 export const formatDistanceBetweenDates = (date, baseDate) => {
   return formatDistance(date, baseDate);
+};
+
+export const getExpStatusFromDate = expDateTs => {
+  let currentDateTs = new Date().getTime();
+
+  let daysDifference = differenceInCalendarDays(expDateTs, currentDateTs);
+
+  console.log({daysDifference});
+
+  if (daysDifference > 7) {
+    return 'green';
+  } else if (daysDifference > 3) {
+    return 'yellow';
+  } else {
+    return 'red';
+  }
 };
