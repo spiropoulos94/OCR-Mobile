@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 
-import {convertTimestampToDate} from '../utils/date';
+import {
+  convertTimestampToDate,
+  formatDistanceBetweenDates,
+} from '../utils/date';
 
 const styles = StyleSheet.create({
   productCard: {
@@ -54,7 +57,13 @@ const ProductCard = ({product}) => {
         <Text style={styles.expDate}>
           {convertTimestampToDate(product.expDateTs)}
         </Text>
-        <Text style={styles.humanExplainedDate}>in 7 days</Text>
+        <Text style={styles.humanExplainedDate}>
+          {' '}
+          {formatDistanceBetweenDates(
+            product.expDateTs,
+            new Date().getTime(),
+          )}{' '}
+        </Text>
       </View>
     </View>
   );

@@ -1,3 +1,5 @@
+import {formatDistance} from 'date-fns';
+
 export const convertTimestampToDate = ts => {
   let dateFormat = new Date(ts);
 
@@ -9,4 +11,8 @@ export const convertTimestampToDate = ts => {
     dateFormat.getFullYear() +
     ' '
   );
+};
+
+export const formatDistanceBetweenDates = (date, baseDate) => {
+  return formatDistance(date, baseDate);
 };
