@@ -13,8 +13,23 @@ export const convertTimestampToDate = ts => {
   );
 };
 
-export const formatDistanceBetweenDates = (date, baseDate) => {
-  return formatDistance(date, baseDate);
+export const formatDistanceBetweenDates = (expDate, date) => {
+  let daysDifference = getDifferenceInDays(expDate, date);
+
+  console.log('Dyas dif=>', daysDifference);
+
+  if (daysDifference < 1) {
+    return 'Today';
+  }
+  if (daysDifference < 2) {
+    return 'Tomorrow';
+  }
+
+  return formatDistance(expDate, date);
+};
+
+export const getDifferenceInDays = (expDateTs, currentDateTs) => {
+  return differenceInCalendarDays(expDateTs, currentDateTs);
 };
 
 export const getExpStatusFromDate = expDateTs => {

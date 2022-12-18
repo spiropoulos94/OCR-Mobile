@@ -92,6 +92,7 @@ const AddProductForm = ({setProducts, products}) => {
         mode="date"
         value={expDate}
         onChange={handleDateChange}
+        minimumDate={new Date()}
       />
       <CustomButton
         title={'Add to Fridge'}

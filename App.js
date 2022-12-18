@@ -51,13 +51,11 @@ function App() {
       <Tab.Navigator>
         {isSignedIn ? (
           <>
-            {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
             <Tab.Screen name="Fridge">
               {() => (
                 <FridgeScreen products={products} setProducts={setProducts} />
               )}
             </Tab.Screen>
-            {/* <Tab.Screen name="Add to Fridge" component={AddToFridgeScreen} /> */}
             <Tab.Screen name="Add to Fridge">
               {() => <AddToFridgeScreen setProducts={setProducts} />}
             </Tab.Screen>
