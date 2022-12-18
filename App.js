@@ -28,7 +28,23 @@ const HomeScreen = () => {
 function App() {
   const isSignedIn = true;
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([
+    {
+      name: 'Milk',
+      expDateTs: 1671317840973,
+      addedOn: 1671317851535,
+    },
+    {
+      name: 'Cheese',
+      expDateTs: 1671317840973,
+      addedOn: 1671317851535,
+    },
+    {
+      name: 'Yogurt',
+      expDateTs: 1671317840973,
+      addedOn: 1671317851535,
+    },
+  ]);
 
   return (
     <NavigationContainer>
