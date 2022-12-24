@@ -59,12 +59,7 @@ const ProductCard = ({product}) => {
     <View style={styles.productCard}>
       <View style={styles.productCardTop}>
         <Text style={styles.productTitle}>{product.name}</Text>
-        <View
-          style={[
-            styles.expStatus,
-            {backgroundColor: getExpStatusFromDate(product.expDateTs)},
-          ]}
-        />
+        <View style={[styles.expStatus, {backgroundColor: status}]} />
       </View>
       <View style={styles.productCardBottom}>
         <Text style={styles.expDate}>
@@ -88,8 +83,8 @@ const FridgeScreen = ({products}) => {
       <View style={styles.filterBtn} title="Filter">
         <Button title="Filter" />
       </View>
-      {products.map(p => (
-        <ProductCard product={p} />
+      {products.map((p, index) => (
+        <ProductCard key={`${p}-${index}`} product={p} />
       ))}
     </ScrollView>
   );

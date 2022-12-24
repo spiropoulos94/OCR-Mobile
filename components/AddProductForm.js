@@ -73,7 +73,6 @@ const AddProductForm = ({setProducts, products}) => {
     showToast(productName, 'success');
     setProductName('');
 
-    console.log('Adding product:', {product});
     setProducts(oldProducts => [...oldProducts, product]);
   };
 

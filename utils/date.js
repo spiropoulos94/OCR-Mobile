@@ -16,8 +16,6 @@ export const convertTimestampToDate = ts => {
 export const formatDistanceBetweenDates = (expDate, date) => {
   let daysDifference = getDifferenceInDays(expDate, date);
 
-  console.log('Dyas dif=>', daysDifference);
-
   if (daysDifference < 1) {
     return 'Today';
   }
@@ -36,8 +34,6 @@ export const getExpStatusFromDate = expDateTs => {
   let currentDateTs = new Date().getTime();
 
   let daysDifference = differenceInCalendarDays(expDateTs, currentDateTs);
-
-  console.log({daysDifference});
 
   if (daysDifference > 7) {
     return 'green';
