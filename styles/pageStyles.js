@@ -2,12 +2,12 @@ import {StyleSheet} from 'react-native';
 
 export const pageStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 15,
+    marginVertical: 10,
+    height: '100%',
   },
   containerScroll: {
-    padding: 5,
+    paddingHorizontal: 15,
+    marginVertical: 10,
   },
 });

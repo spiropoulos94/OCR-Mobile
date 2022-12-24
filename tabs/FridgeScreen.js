@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {pageStyles} from '../styles/pageStyles';
 import {
   convertTimestampToDate,
   formatDistanceBetweenDates,
   getExpStatusFromDate,
 } from '../utils/date';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   productCard: {
     borderRadius: 5,
     backgroundColor: 'white',
     padding: 10,
-    margin: 10,
+    marginBottom: 10,
     display: 'flex',
     flexDirection: 'column',
   },
@@ -41,12 +49,26 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   humanExplainedDate: {
-    // fontSize: ,
     fontStyle: 'italic',
     marginLeft: 'auto',
   },
   filterBtn: {
     marginLeft: 'auto',
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: '#31C283',
+    position: 'absolute',
+    zIndex: 9999999,
+    bottom: 20,
+    right: 10,
+    width: 50,
+    height: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    backgroundColor: 'pink',
   },
 });
 
@@ -79,14 +101,16 @@ const ProductCard = ({product}) => {
 
 const FridgeScreen = ({products}) => {
   return (
-    <ScrollView style={pageStyles.containerScroll}>
-      <View style={styles.filterBtn} title="Filter">
-        <Button title="Filter" />
-      </View>
-      {products.map((p, index) => (
-        <ProductCard key={`${p}-${index}`} product={p} />
-      ))}
-    </ScrollView>
+    <View style={pageStyles.container}>
+      <TouchableOpacity style={styles.filterBtn}>
+        <Icon name="filter" color="white" size={25} />
+      </TouchableOpacity>
+      <ScrollView>
+        {products.map((p, index) => (
+          <ProductCard key={`${p}-${index}`} product={p} />
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 

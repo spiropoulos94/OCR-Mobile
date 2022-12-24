@@ -7,11 +7,8 @@ import {
   StyleSheet,
   Button,
 } from 'react-native';
-
 import CustomButton from './Button';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
-
 import Toast from 'react-native-toast-message';
 
 const showToast = (product, type = 'success') => {
@@ -36,7 +33,7 @@ const emptyProduct = {
 const styles = StyleSheet.create({
   form: {
     backgroundColor: 'white',
-    margin: 20,
+    // margin: 20,
     borderRadius: 10,
     paddingBottom: 20,
   },
