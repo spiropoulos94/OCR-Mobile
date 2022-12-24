@@ -5,8 +5,9 @@ export const pageStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 15,
   },
   containerScroll: {
-    padding: 15,
+    padding: 5,
   },
 });

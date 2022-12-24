@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
-
+import {pageStyles} from '../styles/pageStyles';
 import {
   convertTimestampToDate,
   formatDistanceBetweenDates,
@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginLeft: 'auto',
   },
+  filterBtn: {
+    marginLeft: 'auto',
+  },
 });
 
 const ProductCard = ({product}) => {
@@ -81,7 +84,10 @@ const ProductCard = ({product}) => {
 
 const FridgeScreen = ({products}) => {
   return (
-    <ScrollView>
+    <ScrollView style={pageStyles.containerScroll}>
+      <View style={styles.filterBtn} title="Filter">
+        <Button title="Filter" />
+      </View>
       {products.map(p => (
         <ProductCard product={p} />
       ))}
