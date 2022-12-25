@@ -116,7 +116,16 @@ const FridgeScreen = ({products}) => {
           <ProductCard key={`${p}-${index}`} product={p} />
         ))}
       </ScrollView>
-      <Drawer status={showFilters} setStatus={setShowFilters} />
+      <Drawer status={showFilters} setStatus={setShowFilters} title="Filters">
+        <View
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: 'red',
+          }}>
+          <Text> CHILD OF MODAL</Text>
+        </View>
+      </Drawer>
     </View>
   );
 };
