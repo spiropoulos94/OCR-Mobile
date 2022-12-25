@@ -13,18 +13,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   drawer: {
-    backgroundColor: 'white',
-    height: '75%',
-    marginTop: 'auto',
     padding: 10,
-    borderTopStartRadius: 20,
-    borderTopEndRadius: 20,
-    borderWidth: 1,
-    borderColor: 'lightgray',
   },
   header: {
-    borderBottomColor: 'black',
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 15,
@@ -37,7 +28,7 @@ const Drawer = ({status, setStatus, children, title}) => {
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      presentationStyle="pageSheet"
       visible={status}
       onRequestClose={() => {
         setStatus(false);
