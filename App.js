@@ -14,6 +14,7 @@ import SignUp from './tabs/auth/SignUp';
 import AddToFridgeScreen from './tabs/AddToFridge';
 import FridgeScreen from './tabs/FridgeScreen';
 import Toast from 'react-native-toast-message';
+import Drawer from './components/Drawer';
 
 const Tab = createBottomTabNavigator();
 

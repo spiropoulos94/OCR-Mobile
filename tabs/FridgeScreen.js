@@ -102,9 +102,13 @@ const ProductCard = ({product}) => {
 };
 
 const FridgeScreen = ({products}) => {
+  const [showFilters, setShowFilters] = useState(false);
+
   return (
     <View style={pageStyles.container}>
-      <TouchableOpacity style={styles.filterBtn}>
+      <TouchableOpacity
+        style={styles.filterBtn}
+        onPress={() => setShowFilters(true)}>
         <Icon name="filter" color="white" size={25} />
       </TouchableOpacity>
       <ScrollView>
@@ -112,7 +116,7 @@ const FridgeScreen = ({products}) => {
           <ProductCard key={`${p}-${index}`} product={p} />
         ))}
       </ScrollView>
-      <Drawer />
+      <Drawer status={showFilters} setStatus={setShowFilters} />
     </View>
   );
 };
