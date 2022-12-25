@@ -15,6 +15,8 @@ import {
 } from '../utils/date';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import Drawer from '../components/Drawer';
+
 const styles = StyleSheet.create({
   productCard: {
     borderRadius: 5,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: '#31C283',
     position: 'absolute',
-    zIndex: 9999999,
+    zIndex: 9999,
     bottom: 20,
     right: 10,
     width: 50,
@@ -110,6 +112,7 @@ const FridgeScreen = ({products}) => {
           <ProductCard key={`${p}-${index}`} product={p} />
         ))}
       </ScrollView>
+      <Drawer />
     </View>
   );
 };
