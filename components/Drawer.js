@@ -35,27 +35,31 @@ const Drawer = ({status, setStatus, children, title, fullheight}) => {
   return (
     <Modal
       transparent={fullheight ? false : true}
-      animationType="slide"
+      animationType={fullheight ? 'slide' : ''}
       presentationStyle={fullheight ? 'pageSheet' : ''}
       visible={status}
       onRequestClose={() => {
         setStatus(false);
       }}>
-      {/* <SafeAreaView> */}
-      <View style={[styles.drawer, fullheight ? '' : styles.customHeight]}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => setStatus(false)}>
-            <Icon name="chevron-down" size={20} />
-          </TouchableOpacity>
-          <Text> {title} </Text>
-          <TouchableOpacity>
-            <Text> Reset </Text>
-          </TouchableOpacity>
-          {/* <Icon name="filter" size={20} /> */}
+      <View
+        style={{
+          backgroundColor: fullheight ? '' : 'rgba(0,0,0,0.5)',
+          height: '100%',
+        }}>
+        <View style={[styles.drawer, fullheight ? '' : styles.customHeight]}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setStatus(false)}>
+              <Icon name="chevron-down" size={20} />
+            </TouchableOpacity>
+            <Text> {title} </Text>
+            <TouchableOpacity>
+              <Text> Reset </Text>
+            </TouchableOpacity>
+            {/* <Icon name="filter" size={20} /> */}
+          </View>
+          {children}
         </View>
-        {children}
       </View>
-      {/* </SafeAreaView> */}
     </Modal>
   );
 };
