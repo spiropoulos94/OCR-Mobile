@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 9999,
     bottom: 20,
-    right: 10,
+    right: 20,
     width: 50,
     height: 50,
     display: 'flex',
@@ -116,7 +116,11 @@ const FridgeScreen = ({products}) => {
           <ProductCard key={`${p}-${index}`} product={p} />
         ))}
       </ScrollView>
-      <Drawer status={showFilters} setStatus={setShowFilters} title="Filters">
+      <Drawer
+        // fullheight
+        status={showFilters}
+        setStatus={setShowFilters}
+        title="Filters">
         <View
           style={{
             width: 100,

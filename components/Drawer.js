@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const styles = StyleSheet.create({
   drawer: {
     padding: 10,
+    backgroundColor: 'yellow',
   },
   header: {
     flexDirection: 'row',
@@ -22,18 +23,26 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     marginBottom: 10,
   },
+  customHeight: {
+    backgroundColor: 'blue',
+    marginTop: 'auto',
+    minHeight: '40%',
+    borderRadius: 20,
+  },
 });
 
-const Drawer = ({status, setStatus, children, title}) => {
+const Drawer = ({status, setStatus, children, title, fullheight}) => {
   return (
     <Modal
+      transparent={fullheight ? false : true}
       animationType="slide"
-      presentationStyle="pageSheet"
+      presentationStyle={fullheight ? 'pageSheet' : ''}
       visible={status}
       onRequestClose={() => {
         setStatus(false);
       }}>
-      <View style={styles.drawer}>
+      {/* <SafeAreaView> */}
+      <View style={[styles.drawer, fullheight ? '' : styles.customHeight]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => setStatus(false)}>
             <Icon name="chevron-down" size={20} />
@@ -46,6 +55,7 @@ const Drawer = ({status, setStatus, children, title}) => {
         </View>
         {children}
       </View>
+      {/* </SafeAreaView> */}
     </Modal>
   );
 };
