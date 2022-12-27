@@ -16,6 +16,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Drawer from '../components/Drawer';
+import Filters from '../components/Filters';
 
 const styles = StyleSheet.create({
   productCard: {
@@ -121,14 +122,7 @@ const FridgeScreen = ({products}) => {
         status={showFilters}
         setStatus={setShowFilters}
         title="Filters">
-        <View
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: 'red',
-          }}>
-          <Text> CHILD OF MODAL</Text>
-        </View>
+        <Filters />
       </Drawer>
     </View>
   );
