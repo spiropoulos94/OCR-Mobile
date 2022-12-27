@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 10,
   },
+  formBtn: {
+    marginTop: 15,
+    borderRadius: 10,
+  },
 });
 
 const AddProductForm = ({setProducts, products}) => {
@@ -67,26 +71,31 @@ const AddProductForm = ({setProducts, products}) => {
   };
 
   return (
-    <View style={styles.form}>
-      {/* <Text style={styles.inputLabel}>Product name </Text> */}
-      <TextInput
-        style={styles.input}
-        onChangeText={setProductName}
-        value={productName}
-        placeholder="product name"
-      />
-      <Text style={styles.inputLabel}>Exp Date </Text>
-      <DateTimePicker
-        display="spinner"
-        mode="date"
-        value={expDate}
-        onChange={handleDateChange}
-        minimumDate={new Date()}
-      />
-      <Button onPress={() => addToFridge()} disabled={productName.length < 1}>
+    <>
+      <View style={styles.form}>
+        {/* <Text style={styles.inputLabel}>Product name </Text> */}
+        <TextInput
+          style={styles.input}
+          onChangeText={setProductName}
+          value={productName}
+          placeholder="product name"
+        />
+        <Text style={styles.inputLabel}>Exp Date </Text>
+        <DateTimePicker
+          display="spinner"
+          mode="date"
+          value={expDate}
+          onChange={handleDateChange}
+          minimumDate={new Date()}
+        />
+      </View>
+      <Button
+        buttonStyle={styles.formBtn}
+        onPress={() => addToFridge()}
+        disabled={productName.length < 1}>
         Add to Fridge
       </Button>
-    </View>
+    </>
   );
 };
 
