@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Drawer from '../Drawer';
 import Filters from '../Filters';
+
+//contexts
+
+import {ProductsContext} from '../../contexts/products.context';
 
 const styles = StyleSheet.create({
   productCard: {
@@ -102,8 +106,10 @@ const ProductCard = ({product}) => {
   );
 };
 
-const FridgeScreen = ({products}) => {
+const FridgeScreen = () => {
   const [showFilters, setShowFilters] = useState(false);
+
+  const {products} = useContext(ProductsContext);
 
   return (
     <View style={pageStyles.container}>

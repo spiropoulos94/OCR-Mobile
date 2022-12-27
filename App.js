@@ -16,6 +16,9 @@ import FridgeScreen from './components/tabs/FridgeScreen.jsx';
 import Toast from 'react-native-toast-message';
 import Drawer from './components/Drawer.jsx';
 
+// contexts
+import {ProductsProvider} from './contexts/products.context';
+
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
@@ -48,28 +51,30 @@ function App() {
   ]);
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        {isSignedIn ? (
-          <>
-            <Tab.Screen name="Fridge">
-              {() => (
-                <FridgeScreen products={products} setProducts={setProducts} />
-              )}
-            </Tab.Screen>
-            <Tab.Screen name="Add to Fridge">
-              {() => <AddToFridgeScreen setProducts={setProducts} />}
-            </Tab.Screen>
-          </>
-        ) : (
-          <>
-            <Tab.Screen name="Log In" component={SignIn} />
-            <Tab.Screen name="Sign Up" component={SignUp} />
-          </>
-        )}
-      </Tab.Navigator>
-      <Toast />
-    </NavigationContainer>
+    <ProductsProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          {isSignedIn ? (
+            <>
+              <Tab.Screen name="Fridge">
+                {() => (
+                  <FridgeScreen products={products} setProducts={setProducts} />
+                )}
+              </Tab.Screen>
+              <Tab.Screen name="Add to Fridge">
+                {() => <AddToFridgeScreen setProducts={setProducts} />}
+              </Tab.Screen>
+            </>
+          ) : (
+            <>
+              <Tab.Screen name="Log In" component={SignIn} />
+              <Tab.Screen name="Sign Up" component={SignUp} />
+            </>
+          )}
+        </Tab.Navigator>
+        <Toast />
+      </NavigationContainer>
+    </ProductsProvider>
   );
 }
 
