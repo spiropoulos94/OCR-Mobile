@@ -8,13 +8,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TextRecognition from '@react-native-ml-kit/text-recognition';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
-import SignIn from './tabs/auth/SignIn';
-import SignUp from './tabs/auth/SignUp';
+import SignIn from './components/tabs/auth/SignIn.jsx';
+import SignUp from './components/tabs/auth/SignUp.jsx';
 
-import AddToFridgeScreen from './tabs/AddToFridge';
-import FridgeScreen from './tabs/FridgeScreen';
+import AddToFridgeScreen from './components/tabs/AddToFridge.jsx';
+import FridgeScreen from './components/tabs/FridgeScreen.jsx';
 import Toast from 'react-native-toast-message';
-import Drawer from './components/Drawer';
+import Drawer from './components/Drawer.jsx';
 
 const Tab = createBottomTabNavigator();
 

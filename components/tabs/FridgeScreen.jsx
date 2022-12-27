@@ -7,16 +7,16 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {pageStyles} from '../styles/pageStyles';
+import {pageStyles} from './../../styles/pageStyles';
 import {
   convertTimestampToDate,
   formatDistanceBetweenDates,
   getExpStatusFromDate,
-} from '../utils/date';
+} from '../../utils/date';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Drawer from '../components/Drawer';
-import Filters from '../components/Filters';
+import Drawer from '../Drawer';
+import Filters from '../Filters';
 
 const styles = StyleSheet.create({
   productCard: {

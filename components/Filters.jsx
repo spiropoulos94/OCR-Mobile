@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import {ButtonGroup} from '@rneui/themed';
+import {ButtonGroup, Button} from '@rneui/themed';
 
 const Filters = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -16,6 +16,7 @@ const Filters = () => {
         }}
         containerStyle={{marginBottom: 20}}
       />
+      <Button>Apply</Button>
     </View>
   );
 };
