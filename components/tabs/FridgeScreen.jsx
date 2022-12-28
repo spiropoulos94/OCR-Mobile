@@ -82,8 +82,6 @@ const styles = StyleSheet.create({
 const ProductCard = ({product}) => {
   let status = getExpStatusFromDate(product.expDateTs);
 
-  console.log({status});
-
   return (
     <View style={styles.productCard}>
       <View style={styles.productCardTop}>
@@ -109,7 +107,10 @@ const ProductCard = ({product}) => {
 const FridgeScreen = () => {
   const [showFilters, setShowFilters] = useState(false);
 
-  const {products} = useContext(ProductsContext);
+  const {products, filteredProducts} = useContext(ProductsContext);
+
+  console.log('edw kai ta 2');
+  console.log({products, filteredProducts});
 
   return (
     <View style={pageStyles.container}>
@@ -119,7 +120,7 @@ const FridgeScreen = () => {
         <Icon name="filter" color="white" size={25} />
       </TouchableOpacity>
       <ScrollView>
-        {products.map((p, index) => (
+        {filteredProducts.map((p, index) => (
           <ProductCard key={`${p}-${index}`} product={p} />
         ))}
       </ScrollView>

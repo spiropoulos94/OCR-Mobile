@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react';
+import {createContext, useState, useEffect} from 'react';
 
 // actual value you weant to access
 
@@ -28,9 +28,13 @@ export const ProductsProvider = ({children}) => {
     },
   ]);
 
-  const [filteredProducts, setFilteredProducts] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const value = {products, setProducts, filteredProducts, setFilteredProducts};
+
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
 
   return (
     <ProductsContext.Provider value={value}>
