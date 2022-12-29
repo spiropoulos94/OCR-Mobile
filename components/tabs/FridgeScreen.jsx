@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Drawer from '../Drawer';
 import Filters from '../Filters';
+import Searchbar from '../Searchbar';
 
 //contexts
 
@@ -114,6 +115,7 @@ const FridgeScreen = () => {
 
   return (
     <View style={pageStyles.container}>
+      <Searchbar style={{marginBottom: 15}} />
       <TouchableOpacity
         style={styles.filterBtn}
         onPress={() => setShowFilters(true)}>
