@@ -10,7 +10,11 @@ import {
 } from 'react-native';
 
 const CustomButton = ({title, clickFN, disabled}) => {
-  return <Button disabled={disabled} title={title} onPress={clickFN} />;
+  return (
+    <View>
+      <Button disabled={disabled} title={title} onPress={clickFN} />
+    </View>
+  );
 };
 
 export default CustomButton;
