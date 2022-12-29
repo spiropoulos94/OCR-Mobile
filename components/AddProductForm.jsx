@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, ScrollView, TextInput, StyleSheet} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
-import {Button} from '@rneui/themed';
+import CustomButton from './Button';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -56,6 +56,8 @@ const AddProductForm = ({setProducts, products}) => {
   };
 
   const addToFridge = () => {
+    console.log('ADD TO FRIDGE RUNS');
+
     let product = {
       ...emptyProduct,
       name: productName,
@@ -89,12 +91,11 @@ const AddProductForm = ({setProducts, products}) => {
           minimumDate={new Date()}
         />
       </View>
-      <Button
-        buttonStyle={styles.formBtn}
-        onPress={() => addToFridge()}
-        disabled={productName.length < 1}>
-        Add to Fridge
-      </Button>
+      <CustomButton
+        title={'Add to Fridge'}
+        clickFN={() => addToFridge()}
+        disabled={productName.length < 1}
+      />
     </>
   );
 };
