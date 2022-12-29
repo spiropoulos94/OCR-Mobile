@@ -16,12 +16,14 @@ const Searchbar = ({style}) => {
         // onSubmitEditing={() => null}
       />
 
-      <Icon
-        onPress={() => setInput('')}
-        style={styles.icon}
-        name="close"
-        size={20}
-      />
+      {input.length > 0 && (
+        <Icon
+          onPress={() => setInput('')}
+          style={styles.icon}
+          name="close"
+          size={20}
+        />
+      )}
     </View>
   );
 };
