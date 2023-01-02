@@ -6,8 +6,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  PanResponder,
-  Animated,
 } from 'react-native';
 import {pageStyles} from './../../styles/pageStyles';
 import {
@@ -85,51 +83,25 @@ const styles = StyleSheet.create({
 const ProductCard = ({product}) => {
   let status = getExpStatusFromDate(product.expDateTs);
 
-  const pan = useRef(new Animated.ValueXY()).current;
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        console.log('SKATA');
-
-        pan.setOffset({
-          x: pan.x._value,
-          y: pan.y._value,
-        });
-      },
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),
-      onPanResponderRelease: () => {
-        pan.flattenOffset();
-      },
-    }),
-  ).current;
-
   return (
-    <Animated.View
-      style={{
-        transform: [{translateX: pan.x}, {translateY: pan.y}],
-      }}
-      {...panResponder.panHandlers}>
-      <View style={styles.productCard}>
-        <View style={styles.productCardTop}>
-          <Text style={styles.productTitle}>{product.name}</Text>
-          <View style={[styles.expStatus, {backgroundColor: status}]} />
-        </View>
-        <View style={styles.productCardBottom}>
-          <Text style={styles.expDate}>
-            {convertTimestampToDate(product.expDateTs)}
-          </Text>
-          <Text style={styles.humanExplainedDate}>
-            {' '}
-            {formatDistanceBetweenDates(
-              product.expDateTs,
-              new Date().getTime(),
-            )}{' '}
-          </Text>
-        </View>
+    <View style={styles.productCard}>
+      <View style={styles.productCardTop}>
+        <Text style={styles.productTitle}>{product.name}</Text>
+        <View style={[styles.expStatus, {backgroundColor: status}]} />
       </View>
-    </Animated.View>
+      <View style={styles.productCardBottom}>
+        <Text style={styles.expDate}>
+          {convertTimestampToDate(product.expDateTs)}
+        </Text>
+        <Text style={styles.humanExplainedDate}>
+          {' '}
+          {formatDistanceBetweenDates(
+            product.expDateTs,
+            new Date().getTime(),
+          )}{' '}
+        </Text>
+      </View>
+    </View>
   );
 };
 
