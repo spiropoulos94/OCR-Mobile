@@ -3,33 +3,64 @@ import {View, Text, StyleSheet} from 'react-native';
 // contexts
 import {ProductsContext} from '../contexts/products.context';
 import CustomButton from './Button';
+import {Divider, CheckBox} from '@rneui/themed';
 
-const sortOptions = [
+const SORT_OPTIONS = [
   {
-    title: 'ExpDateAsc',
-    label: 'Expiry date soonest to latest',
-  },
-  {
-    title: 'ExpDateDesc',
-    label: 'Expiry date latest to soonest',
-  },
-  {
-    title: 'AddedDateAsc',
+    value: 'AddedDateAsc',
     label: 'Added date most recent first',
+    enabled: true,
   },
   {
-    title: 'AddedDateDesc',
+    value: 'AddedDateDesc',
     label: 'Added date oldest first',
+    enabled: false,
+  },
+  {
+    value: 'ExpDateAsc',
+    label: 'Expiry date soonest to latest',
+    enabled: false,
+  },
+  {
+    value: 'ExpDateDesc',
+    label: 'Expiry date latest to soonest',
+    enabled: false,
   },
 ];
 
-const Sort = () => {
+const Sort = ({setSortOrder, sortOrder}) => {
+  const [sortOptions, setSortOptions] = useState(SORT_OPTIONS);
+
+  const handlePress = option => {
+    console.log({option});
+    setSortOrder(option.value);
+    let newSortOptions = sortOptions.map(o => {
+      if (o.value === option.value) {
+        o.enabled = true;
+      } else {
+        o.enabled = false;
+      }
+      return o;
+    });
+    setSortOptions(newSortOptions);
+  };
+
   return (
-    <View>
-      <Text>Sort By</Text>
+    <View style={{marginBottom: 15}}>
+      <Text style={styles.filterLabel}>Sort By</Text>
       {sortOptions.map(o => (
-        <View key={o.title}>
-          <Text>{o.label}</Text>
+        <View key={o.value}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <Text>{o.label}</Text>
+            <CheckBox onPress={() => handlePress(o)} checked={o.enabled} />
+          </View>
+          <Divider />
         </View>
       ))}
     </View>
@@ -41,9 +72,10 @@ const Filters = ({setFilteredProducts, products}) => {
 
   return (
     <View>
-      <Text>WE ARE THE FILTERS</Text>
+      <Text>{sortOrder}</Text>
       <Sort setSortOrder={setSortOrder} />
       <CustomButton
+        style={{marginTop: 15}}
         title={'APPLY'}
         clickFN={() => {
           console.log('FIlters applied!!');
@@ -57,3 +89,10 @@ const Filters = ({setFilteredProducts, products}) => {
 };
 
 export default Filters;
+
+const styles = StyleSheet.create({
+  filterLabel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});

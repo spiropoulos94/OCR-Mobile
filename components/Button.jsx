@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import {Button} from '@rneui/themed';
 
-const CustomButton = ({title, clickFN, disabled}) => {
+const CustomButton = ({title, clickFN, disabled, style}) => {
   return (
-    <View>
+    <View style={style}>
       <Button disabled={disabled} title={title} onPress={clickFN} />
     </View>
   );
