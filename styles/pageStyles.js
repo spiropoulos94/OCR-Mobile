@@ -5,8 +5,8 @@ export const pageStyles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     height: '100%',
-    borderColor: 'green',
-    borderWidth: 5,
+    // borderColor: 'green',
+    // borderWidth: 5,
   },
   containerScroll: {
     paddingHorizontal: 15,
