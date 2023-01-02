@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import {
   View,
   Text,
@@ -111,6 +111,10 @@ const FridgeScreen = () => {
   const {products} = useContext(ProductsContext);
 
   const [filteredProducts, setFilteredProducts] = useState(products);
+
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
 
   console.log('edw kai ta 2');
   console.log({products, filteredProducts});
