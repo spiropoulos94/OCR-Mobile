@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 // contexts
 import {ProductsContext} from '../contexts/products.context';
@@ -28,12 +28,14 @@ const SORT_OPTIONS = [
   },
 ];
 
-const Sort = ({setSortOrder, sortOrder}) => {
+const Sort = ({setSortOrder}) => {
   const [sortOptions, setSortOptions] = useState(SORT_OPTIONS);
 
+  useEffect(() => {
+    setSortOrder(sortOptions.find(o => o.enabled == true).value);
+  }, [sortOptions]);
+
   const handlePress = option => {
-    console.log({option});
-    setSortOrder(option.value);
     let newSortOptions = sortOptions.map(o => {
       if (o.value === option.value) {
         o.enabled = true;
