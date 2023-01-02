@@ -4,6 +4,8 @@ import {View, Text, StyleSheet} from 'react-native';
 import {ProductsContext} from '../contexts/products.context';
 import CustomButton from './Button';
 import {Divider, CheckBox} from '@rneui/themed';
+// utils
+import {SortProducts} from '../utils/filters';
 
 const SORT_OPTIONS = [
   {
@@ -60,7 +62,12 @@ const Sort = ({setSortOrder}) => {
               alignItems: 'center',
             }}>
             <Text>{o.label}</Text>
-            <CheckBox onPress={() => handlePress(o)} checked={o.enabled} />
+            <CheckBox
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              onPress={() => handlePress(o)}
+              checked={o.enabled}
+            />
           </View>
           <Divider />
         </View>
@@ -69,8 +76,20 @@ const Sort = ({setSortOrder}) => {
   );
 };
 
-const Filters = ({setFilteredProducts, products}) => {
+const Filters = ({setFilteredProducts, products, setShowFilters}) => {
   const [sortOrder, setSortOrder] = useState(null);
+
+  const closeModal = () => {
+    setShowFilters(false);
+  };
+
+  const applyFilters = () => {
+    alert('Filters applied!');
+    let sortedProducts = SortProducts(sortOrder, products);
+    console.log({sortedProducts});
+    setFilteredProducts(sortedProducts);
+    closeModal();
+  };
 
   return (
     <View>
@@ -80,10 +99,11 @@ const Filters = ({setFilteredProducts, products}) => {
         style={{marginTop: 15}}
         title={'APPLY'}
         clickFN={() => {
-          console.log('FIlters applied!!');
-          let newProducts = products.filter(p => p.name == 'Milk');
-          console.log(newProducts);
-          setFilteredProducts(newProducts);
+          applyFilters();
+          // console.log('FIlters applied!!');
+          // let newProducts = products.filter(p => p.name == 'Milk');
+          // console.log(newProducts);
+          // setFilteredProducts(newProducts);
         }}
       />
     </View>

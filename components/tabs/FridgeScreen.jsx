@@ -144,6 +144,7 @@ const FridgeScreen = () => {
         <Filters
           products={products}
           setFilteredProducts={setFilteredProducts}
+          setShowFilters={setShowFilters}
         />
       </Drawer>
     </View>
