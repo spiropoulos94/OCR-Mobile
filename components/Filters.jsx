@@ -25,10 +25,10 @@ const sortOptions = [
 
 const Sort = () => {
   return (
-    <View style={styles.filter}>
+    <View>
       <Text>Sort By</Text>
       {sortOptions.map(o => (
-        <View style={styles.filter} key={o.title}>
+        <View key={o.title}>
           <Text>{o.label}</Text>
         </View>
       ))}
@@ -55,12 +55,5 @@ const Filters = ({setFilteredProducts, products}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  filter: {
-    borderBottomColor: 'gray',
-    borderBottomWidth: 2,
-  },
-});
 
 export default Filters;

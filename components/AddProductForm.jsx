@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     // margin: 20,
     borderRadius: 10,
-    paddingBottom: 20,
+    // paddingBottom: 20,
+    marginBottom: 15,
   },
   input: {
     // height: 40,
@@ -40,10 +41,6 @@ const styles = StyleSheet.create({
   inputLabel: {
     marginLeft: 10,
     marginTop: 10,
-  },
-  formBtn: {
-    marginTop: 15,
-    borderRadius: 10,
   },
 });
 

@@ -5,9 +5,9 @@ import {
   ScrollView,
   TextInput,
   StyleSheet,
-  Button,
   TouchableOpacity,
 } from 'react-native';
+import {Button} from '@rneui/themed';
 
 const CustomButton = ({title, clickFN, disabled}) => {
   return (
