@@ -4,14 +4,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ProductsContext} from '../contexts/products.context';
 
-const Searchbar = ({style}) => {
+const Searchbar = ({style, products, setFilteredProducts}) => {
   const [input, setInput] = useState('');
 
-  const {setFilteredProducts} = useContext(ProductsContext);
-
+  // apply filtering on input change
   useEffect(() => {
-    if (input.length) {
-      setFilteredProducts([]);
+    if (!input) {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(
+        products.filter(p =>
+          p.name.toLowerCase().includes(input.toLowerCase()),
+        ),
+      );
     }
   }, [input]);
 

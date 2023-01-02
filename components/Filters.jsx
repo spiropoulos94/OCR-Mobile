@@ -4,21 +4,17 @@ import {View, Text} from 'react-native';
 import {ProductsContext} from '../contexts/products.context';
 import CustomButton from './Button';
 
-const Filters = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const {products, filteredProducts, setFilteredProducts} =
-    useContext(ProductsContext);
-
+const Filters = ({setFilteredProducts, products}) => {
   return (
     <View>
       <Text>WE ARE THE FILTERS</Text>
       <CustomButton
-        title={'Add to Fridge'}
+        title={'APPLY'}
         clickFN={() => {
-          let filteredProductsss = [];
-
-          setFilteredProducts(filteredProductsss);
+          console.log('FIlters applied!!');
+          let newProducts = products.filter(p => p.name == 'Milk');
+          console.log(newProducts);
+          setFilteredProducts(newProducts);
         }}
       />
     </View>

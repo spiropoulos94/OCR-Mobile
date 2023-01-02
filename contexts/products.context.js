@@ -5,8 +5,8 @@ import {createContext, useState, useEffect} from 'react';
 export const ProductsContext = createContext({
   products: [],
   setProducts: () => null,
-  filteredProducts: [],
-  setFilteredProducts: () => null,
+  // filteredProducts: [],
+  // setFilteredProducts: () => null,
 });
 
 export const ProductsProvider = ({children}) => {
@@ -28,13 +28,17 @@ export const ProductsProvider = ({children}) => {
     },
   ]);
 
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  // const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const value = {products, setProducts, filteredProducts, setFilteredProducts};
+  const value = {
+    products,
+    setProducts,
+    //  filteredProducts, setFilteredProducts
+  };
 
-  useEffect(() => {
-    setFilteredProducts(products);
-  }, [products]);
+  // useEffect(() => {
+  //   setFilteredProducts(products);
+  // }, [products]);
 
   return (
     <ProductsContext.Provider value={value}>

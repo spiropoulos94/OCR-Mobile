@@ -108,14 +108,20 @@ const ProductCard = ({product}) => {
 const FridgeScreen = () => {
   const [showFilters, setShowFilters] = useState(false);
 
-  const {products, filteredProducts} = useContext(ProductsContext);
+  const {products} = useContext(ProductsContext);
+
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   console.log('edw kai ta 2');
   console.log({products, filteredProducts});
 
   return (
     <View style={pageStyles.container}>
-      <Searchbar style={{marginBottom: 15}} />
+      <Searchbar
+        style={{marginBottom: 15}}
+        products={products}
+        setFilteredProducts={setFilteredProducts}
+      />
       <TouchableOpacity
         style={styles.filterBtn}
         onPress={() => setShowFilters(true)}>
@@ -131,7 +137,10 @@ const FridgeScreen = () => {
         status={showFilters}
         setStatus={setShowFilters}
         title="Filters">
-        <Filters />
+        <Filters
+          products={products}
+          setFilteredProducts={setFilteredProducts}
+        />
       </Drawer>
     </View>
   );
