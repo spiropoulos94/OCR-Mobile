@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, Text, ScrollView, TextInput, StyleSheet} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
@@ -48,25 +48,30 @@ const AddProductForm = ({setProducts, products}) => {
   const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
+  const count = useRef(0);
+
   const handleDateChange = e => {
     setExpDate(new Date(e.nativeEvent.timestamp));
   };
 
   const addToFridge = () => {
-    console.log('ADD TO FRIDGE RUNS');
-
     let product = {
       ...emptyProduct,
       name: productName,
       expDate: expDate,
       expDateTs: new Date(expDate).getTime(),
       addedOn: new Date().getTime(),
+      // addedOn: count.current,
     };
+
+    count.current = count.current++;
+
+    count.current = count.current + 1;
 
     showToast(productName, 'success');
     setProductName('');
 
-    setProducts(oldProducts => [...oldProducts, product]);
+    setProducts(oldProducts => [...oldProducts, {...product}]);
   };
 
   return (

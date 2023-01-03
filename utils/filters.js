@@ -1,26 +1,27 @@
 export const SortProducts = (sortOrder, products) => {
-  let sortedProducts = [];
+  let toBeSorted = [...products];
   switch (sortOrder) {
     case 'AddedDateAsc':
       // code block
-      alert('Pio mpike prwto');
-      break;
-    case 'AddedDateDesc':
-      alert('Pio mpike teleytaio');
-      // code block
-      break;
-    case 'ExpDateAsc':
-      alert('Pio ligei prwto');
-      // code block
-      break;
-    case 'ExpDateDesc':
-      alert('Pio ligei teleytaio');
-      // code ExpDateDesc
-      break;
+      // alert('Pio mpike prwto');
+      console.log('ADDED DATE ASC');
+      toBeSorted.sort((a, b) => b.addedOn - a.addedOn);
 
+      return toBeSorted;
+    // break;
+    case 'AddedDateDesc':
+      console.log('ADDED DATE DESC');
+      toBeSorted.sort((a, b) => b.addedOn + a.addedOn);
+
+      return toBeSorted;
+    // code block
+    case 'ExpDateAsc':
+      toBeSorted.sort((a, b) => b.expDateTs + a.expDateTs);
+      return toBeSorted;
+    case 'ExpDateDesc':
+      toBeSorted.sort((a, b) => b.expDateTs - a.expDateTs);
+      return toBeSorted;
     default:
     // code block
   }
-
-  return sortedProducts;
 };

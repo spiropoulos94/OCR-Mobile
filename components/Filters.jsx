@@ -9,13 +9,13 @@ import {SortProducts} from '../utils/filters';
 
 const SORT_OPTIONS = [
   {
-    value: 'AddedDateAsc',
-    label: 'Added date most recent first',
+    value: 'AddedDateDesc',
+    label: 'Added date oldest first',
     enabled: true,
   },
   {
-    value: 'AddedDateDesc',
-    label: 'Added date oldest first',
+    value: 'AddedDateAsc',
+    label: 'Added date most recent first',
     enabled: false,
   },
   {
@@ -83,12 +83,20 @@ const Filters = ({setFilteredProducts, products, setShowFilters}) => {
     setShowFilters(false);
   };
 
-  const applyFilters = () => {
-    alert('Filters applied!');
+  useEffect(() => {
+    applyFilters();
+  }, [sortOrder]);
+
+  const applyFilters = (shouldCloseModal = false) => {
+    // alert('Filters applied!');
     let sortedProducts = SortProducts(sortOrder, products);
-    console.log({sortedProducts});
-    setFilteredProducts(sortedProducts);
-    closeModal();
+    if (sortedProducts) {
+      console.log({sortedProducts, products});
+      setFilteredProducts([...sortedProducts]);
+    }
+    if (shouldCloseModal) {
+      closeModal();
+    }
   };
 
   return (
@@ -99,11 +107,7 @@ const Filters = ({setFilteredProducts, products, setShowFilters}) => {
         style={{marginTop: 15}}
         title={'APPLY'}
         clickFN={() => {
-          applyFilters();
-          // console.log('FIlters applied!!');
-          // let newProducts = products.filter(p => p.name == 'Milk');
-          // console.log(newProducts);
-          // setFilteredProducts(newProducts);
+          applyFilters(true);
         }}
       />
     </View>

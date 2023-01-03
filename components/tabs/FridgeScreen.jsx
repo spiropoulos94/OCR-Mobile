@@ -85,6 +85,7 @@ const ProductCard = ({product}) => {
 
   return (
     <View style={styles.productCard}>
+      <Text>{product.addedOn}</Text>
       <View style={styles.productCardTop}>
         <Text style={styles.productTitle}>{product.name}</Text>
         <View style={[styles.expStatus, {backgroundColor: status}]} />
@@ -115,9 +116,6 @@ const FridgeScreen = () => {
   useEffect(() => {
     setFilteredProducts(products);
   }, [products]);
-
-  console.log('edw kai ta 2');
-  console.log({products, filteredProducts});
 
   return (
     <View style={pageStyles.container}>
