@@ -83,12 +83,8 @@ const Filters = ({setFilteredProducts, products, setShowFilters}) => {
     setShowFilters(false);
   };
 
-  useEffect(() => {
-    applyFilters();
-  }, [sortOrder]);
-
   const applyFilters = (shouldCloseModal = false) => {
-    // alert('Filters applied!');
+    alert('Filters applied!');
     let sortedProducts = SortProducts(sortOrder, products);
     if (sortedProducts) {
       console.log({sortedProducts, products});
