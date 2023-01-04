@@ -61,8 +61,12 @@ const reducer = (state = initialState, action) => {
 
   switch (type) {
     case 'ADD_PRODUCT':
+      let newProducts = [...state.products, payload.product];
       return Object.assign({}, state, {
-        products: [...state.products, payload.product],
+        products: newProducts,
+        filteredProducts: state.filteredProducts
+          ? SortProducts(sortOrder, newProducts)
+          : null,
       });
     case 'FILTER_PRODUCTS':
       console.log('Filter products running', {sortOrder, products});
