@@ -9,15 +9,7 @@ const Searchbar = ({style, products, setFilteredProducts}) => {
 
   // apply filtering on input change
   useEffect(() => {
-    if (!input) {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(
-        products.filter(p =>
-          p.name.toLowerCase().includes(input.toLowerCase()),
-        ),
-      );
-    }
+    console.log('Input is changing');
   }, [input]);
 
   return (

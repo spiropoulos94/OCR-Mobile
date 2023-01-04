@@ -25,10 +25,7 @@ const emptyProduct = {
 
 const styles = StyleSheet.create({
   form: {
-    backgroundColor: 'white',
-    // margin: 20,
     borderRadius: 10,
-    // paddingBottom: 20,
     marginBottom: 15,
   },
   input: {
@@ -85,14 +82,14 @@ const AddProductForm = ({setProducts, products}) => {
           placeholder="product name"
         />
         <Text style={styles.inputLabel}>Exp Date </Text>
-        <DateTimePicker
-          display="spinner"
-          mode="date"
-          value={expDate}
-          onChange={handleDateChange}
-          minimumDate={new Date()}
-        />
       </View>
+      <DateTimePicker
+        display="spinner"
+        mode="date"
+        value={expDate}
+        onChange={handleDateChange}
+        minimumDate={new Date()}
+      />
       <CustomButton
         title={'Add to Fridge'}
         clickFN={() => addToFridge()}
