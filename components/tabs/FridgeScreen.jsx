@@ -106,7 +106,7 @@ const ProductCard = ({product}) => {
 };
 
 const FridgeScreen = () => {
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFiltersDrawer, setShowFiltersDrawer] = useState(false);
 
   const {state, dispatch} = useContext(ProductsContext);
 
@@ -129,17 +129,20 @@ const FridgeScreen = () => {
       <Searchbar style={{marginBottom: 15}} products={products} />
       <TouchableOpacity
         style={styles.filterBtn}
-        onPress={() => setShowFilters(true)}>
+        onPress={() => setShowFiltersDrawer(true)}>
         <Icon name="filter" color="white" size={25} />
       </TouchableOpacity>
       <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
       <Drawer
         // fullheight
         headerFunc={() => dispatch({type: 'CLEAR_FILTERS'})}
-        status={showFilters}
-        setStatus={setShowFilters}
+        status={showFiltersDrawer}
+        setStatus={setShowFiltersDrawer}
         title="Filters">
-        <Filters products={products} setShowFilters={setShowFilters} />
+        <Filters
+          products={products}
+          setShowFiltersDrawer={setShowFiltersDrawer}
+        />
       </Drawer>
     </View>
   );

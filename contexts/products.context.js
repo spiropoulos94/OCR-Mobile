@@ -79,7 +79,7 @@ const reducer = (state = initialState, action) => {
       });
     case 'CLEAR_FILTERS':
       return Object.assign({}, state, {
-        filters: initialState.filters,
+        filters: JSON.parse(JSON.stringify(initialState.filters)),
         filteredProducts: null,
       });
     default:
