@@ -31,7 +31,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Drawer = ({status, setStatus, children, title, fullheight}) => {
+const Drawer = ({
+  status,
+  setStatus,
+  children,
+  title,
+  headerFunc = () => null,
+}) => {
   return (
     <Modal
       presentationStyle="pageSheet"
@@ -46,7 +52,7 @@ const Drawer = ({status, setStatus, children, title, fullheight}) => {
             <Icon name="chevron-down" size={20} />
           </TouchableOpacity>
           <Text> {title} </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => headerFunc()}>
             <Text> Reset </Text>
           </TouchableOpacity>
           {/* <Icon name="filter" size={20} /> */}

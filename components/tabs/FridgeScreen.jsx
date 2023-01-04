@@ -135,6 +135,7 @@ const FridgeScreen = () => {
       <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
       <Drawer
         // fullheight
+        headerFunc={() => dispatch({type: 'CLEAR_FILTERS'})}
         status={showFilters}
         setStatus={setShowFilters}
         title="Filters">

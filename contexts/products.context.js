@@ -77,6 +77,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         filters: {...state.filters, SORT_OPTIONS: payload.SORT_OPTIONS},
       });
+    case 'CLEAR_FILTERS':
+      return Object.assign({}, state, {
+        filters: initialState.filters,
+        filteredProducts: null,
+      });
     default:
       return state;
   }
