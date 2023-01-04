@@ -113,17 +113,15 @@ const FridgeScreen = () => {
   const {products, filteredProducts, filters} = state;
 
   const renderProducts = (products, filteredProducts) => {
-    if (filteredProducts) {
-      alert('deixnei filtered');
-      return filteredProducts.map((p, index) => (
-        <ProductCard key={`${p}-${index}`} product={p} />
-      ));
-    } else {
-      alert('deixnei kanonika products');
-      return products.map((p, index) => (
-        <ProductCard key={`${p}-${index}`} product={p} />
-      ));
-    }
+    let productsToRender = filteredProducts ? filteredProducts : products;
+
+    let msg = filteredProducts ? 'filteredProducts' : 'products';
+
+    alert(`Deixnei : ${msg}`);
+
+    return productsToRender.map((p, index) => (
+      <ProductCard key={`${p}-${index}`} product={p} />
+    ));
   };
 
   return (

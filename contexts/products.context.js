@@ -2,8 +2,8 @@ import {createContext, useState, useEffect, useReducer} from 'react';
 import {SortProducts} from '../utils/filters';
 
 export const ProductsContext = createContext({
-  products: [],
-  setProducts: () => null,
+  state: {},
+  dispatch: () => null,
   // filteredProducts: [],
   // setFilteredProducts: () => null,
 });
