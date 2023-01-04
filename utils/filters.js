@@ -3,7 +3,6 @@ export const SortProducts = (sortOrder, products) => {
   switch (sortOrder) {
     case 'AddedDateAsc':
       // code block
-      // alert('Pio mpike prwto');
       console.log('ADDED DATE ASC');
       toBeSorted.sort((a, b) => b.addedOn - a.addedOn);
 

@@ -108,41 +108,39 @@ const ProductCard = ({product}) => {
 const FridgeScreen = () => {
   const [showFilters, setShowFilters] = useState(false);
 
-  const {products} = useContext(ProductsContext);
+  const {state, dispatch} = useContext(ProductsContext);
 
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const {products, filteredProducts, filters} = state;
 
-  useEffect(() => {
-    setFilteredProducts(products);
-  }, [products]);
+  const renderProducts = (products, filteredProducts) => {
+    if (filteredProducts) {
+      alert('deixnei filtered');
+      return filteredProducts.map((p, index) => (
+        <ProductCard key={`${p}-${index}`} product={p} />
+      ));
+    } else {
+      alert('deixnei kanonika products');
+      return products.map((p, index) => (
+        <ProductCard key={`${p}-${index}`} product={p} />
+      ));
+    }
+  };
 
   return (
     <View style={pageStyles.container}>
-      <Searchbar
-        style={{marginBottom: 15}}
-        products={products}
-        setFilteredProducts={setFilteredProducts}
-      />
+      <Searchbar style={{marginBottom: 15}} products={products} />
       <TouchableOpacity
         style={styles.filterBtn}
         onPress={() => setShowFilters(true)}>
         <Icon name="filter" color="white" size={25} />
       </TouchableOpacity>
-      <ScrollView>
-        {filteredProducts.map((p, index) => (
-          <ProductCard key={`${p}-${index}`} product={p} />
-        ))}
-      </ScrollView>
+      <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
       <Drawer
         // fullheight
         status={showFilters}
         setStatus={setShowFilters}
         title="Filters">
-        <Filters
-          products={products}
-          setFilteredProducts={setFilteredProducts}
-          setShowFilters={setShowFilters}
-        />
+        <Filters products={products} setShowFilters={setShowFilters} />
       </Drawer>
     </View>
   );

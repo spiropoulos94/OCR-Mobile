@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useReducer} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 // contexts
 import {ProductsContext} from '../contexts/products.context';
@@ -30,15 +30,13 @@ const SORT_OPTIONS = [
   },
 ];
 
-const Sort = ({setSortOrder}) => {
-  const [sortOptions, setSortOptions] = useState(SORT_OPTIONS);
+const Sort = () => {
+  const {state, dispatch} = useContext(ProductsContext);
 
-  useEffect(() => {
-    setSortOrder(sortOptions.find(o => o.enabled == true).value);
-  }, [sortOptions]);
+  const {SORT_OPTIONS} = state.filters;
 
   const handlePress = option => {
-    let newSortOptions = sortOptions.map(o => {
+    let newSortOptions = SORT_OPTIONS.map(o => {
       if (o.value === option.value) {
         o.enabled = true;
       } else {
@@ -46,13 +44,19 @@ const Sort = ({setSortOrder}) => {
       }
       return o;
     });
-    setSortOptions(newSortOptions);
+
+    dispatch({
+      type: 'SET_SORT_OPTIONS',
+      payload: {
+        SORT_OPTIONS: newSortOptions,
+      },
+    });
   };
 
   return (
     <View style={{marginBottom: 15}}>
       <Text style={styles.filterLabel}>Sort By</Text>
-      {sortOptions.map(o => (
+      {SORT_OPTIONS.map(o => (
         <View key={o.value}>
           <View
             style={{
@@ -77,19 +81,14 @@ const Sort = ({setSortOrder}) => {
 };
 
 const Filters = ({setFilteredProducts, products, setShowFilters}) => {
-  const [sortOrder, setSortOrder] = useState(null);
-
   const closeModal = () => {
     setShowFilters(false);
   };
 
+  const {state, dispatch} = useContext(ProductsContext);
+
   const applyFilters = (shouldCloseModal = false) => {
-    alert('Filters applied!');
-    let sortedProducts = SortProducts(sortOrder, products);
-    if (sortedProducts) {
-      console.log({sortedProducts, products});
-      setFilteredProducts([...sortedProducts]);
-    }
+    dispatch({type: 'FILTER_PRODUCTS'});
     if (shouldCloseModal) {
       closeModal();
     }
@@ -97,8 +96,7 @@ const Filters = ({setFilteredProducts, products, setShowFilters}) => {
 
   return (
     <View>
-      <Text>{sortOrder}</Text>
-      <Sort setSortOrder={setSortOrder} />
+      <Sort />
       <CustomButton
         style={{marginTop: 15}}
         title={'APPLY'}

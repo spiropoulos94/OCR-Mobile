@@ -1,8 +1,9 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import {View, Text, ScrollView, TextInput, StyleSheet} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
 import CustomButton from './Button';
+import {ProductsContext} from '../contexts/products.context';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -41,11 +42,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddProductForm = ({setProducts, products}) => {
+const AddProductForm = () => {
   const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
-  const count = useRef(0);
+  const {dispatch} = useContext(ProductsContext);
 
   const handleDateChange = e => {
     setExpDate(new Date(e.nativeEvent.timestamp));
@@ -61,20 +62,20 @@ const AddProductForm = ({setProducts, products}) => {
       // addedOn: count.current,
     };
 
-    count.current = count.current++;
-
-    count.current = count.current + 1;
+    dispatch({
+      type: 'ADD_PRODUCT',
+      payload: {
+        product: product,
+      },
+    });
 
     showToast(productName, 'success');
     setProductName('');
-
-    setProducts(oldProducts => [...oldProducts, product]);
   };
 
   return (
     <>
       <View style={styles.form}>
-        {/* <Text style={styles.inputLabel}>Product name </Text> */}
         <TextInput
           style={styles.input}
           onChangeText={setProductName}

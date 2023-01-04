@@ -1,6 +1,5 @@
-import {createContext, useState, useEffect} from 'react';
-
-// actual value you weant to access
+import {createContext, useState, useEffect, useReducer} from 'react';
+import {SortProducts} from '../utils/filters';
 
 export const ProductsContext = createContext({
   products: [],
@@ -9,8 +8,8 @@ export const ProductsContext = createContext({
   // setFilteredProducts: () => null,
 });
 
-export const ProductsProvider = ({children}) => {
-  const [products, setProducts] = useState([
+let initialState = {
+  products: [
     {
       name: 'Milk',
       expDateTs: 1671317840973,
@@ -26,22 +25,64 @@ export const ProductsProvider = ({children}) => {
       expDateTs: 1671317840973,
       addedOn: 1671317851535,
     },
-  ]);
+  ],
+  filteredProducts: null,
+  filters: {
+    SORT_OPTIONS: [
+      {
+        value: 'AddedDateDesc',
+        label: 'Added date oldest first',
+        enabled: true,
+      },
+      {
+        value: 'AddedDateAsc',
+        label: 'Added date most recent first',
+        enabled: false,
+      },
+      {
+        value: 'ExpDateAsc',
+        label: 'Expiry date soonest to latest',
+        enabled: false,
+      },
+      {
+        value: 'ExpDateDesc',
+        label: 'Expiry date latest to soonest',
+        enabled: false,
+      },
+    ],
+  },
+};
 
-  // const [filteredProducts, setFilteredProducts] = useState(products);
+const reducer = (state = initialState, action) => {
+  const {type, payload} = action;
 
-  const value = {
-    products,
-    setProducts,
-    //  filteredProducts, setFilteredProducts
-  };
+  const sortOrder = state.filters.SORT_OPTIONS.find(o => o.enabled).value;
+  const products = state.products;
 
-  // useEffect(() => {
-  //   setFilteredProducts(products);
-  // }, [products]);
+  switch (type) {
+    case 'ADD_PRODUCT':
+      return Object.assign({}, state, {
+        products: [...state.products, payload.product],
+      });
+    case 'FILTER_PRODUCTS':
+      console.log('Filter products running', {sortOrder, products});
+      return Object.assign({}, state, {
+        filteredProducts: SortProducts(sortOrder, products),
+      });
+    case 'SET_SORT_OPTIONS':
+      return Object.assign({}, state, {
+        filters: {...state.filters, SORT_OPTIONS: payload.SORT_OPTIONS},
+      });
+    default:
+      return state;
+  }
+};
+
+export const ProductsProvider = ({children}) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <ProductsContext.Provider value={value}>
+    <ProductsContext.Provider value={{state, dispatch}}>
       {children}
     </ProductsContext.Provider>
   );
