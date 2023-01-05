@@ -21,34 +21,8 @@ import {ProductsProvider} from './contexts/products.context';
 
 const Tab = createBottomTabNavigator();
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
-  );
-};
-
 function App() {
   const isSignedIn = true;
-
-  const [products, setProducts] = useState([
-    {
-      name: 'Milk',
-      expDateTs: 1671317840973,
-      addedOn: 1671317851535,
-    },
-    {
-      name: 'Cheese',
-      expDateTs: 1671317840973,
-      addedOn: 1671317851535,
-    },
-    {
-      name: 'Yogurt',
-      expDateTs: 1671317840973,
-      addedOn: 1671317851535,
-    },
-  ]);
 
   return (
     <ProductsProvider>
@@ -56,13 +30,9 @@ function App() {
         <Tab.Navigator>
           {isSignedIn ? (
             <>
-              <Tab.Screen name="Fridge">
-                {() => (
-                  <FridgeScreen products={products} setProducts={setProducts} />
-                )}
-              </Tab.Screen>
+              <Tab.Screen name="Fridge">{() => <FridgeScreen />}</Tab.Screen>
               <Tab.Screen name="Add to Fridge">
-                {() => <AddToFridgeScreen setProducts={setProducts} />}
+                {() => <AddToFridgeScreen />}
               </Tab.Screen>
             </>
           ) : (
