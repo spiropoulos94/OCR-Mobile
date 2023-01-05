@@ -19,6 +19,7 @@ import {Badge} from '@rneui/themed';
 import Drawer from '../Drawer';
 import Filters from '../Filters';
 import Searchbar from '../Searchbar';
+import FloatingButtonWithOptions from '../FloatingButtonWithOptions';
 
 //contexts
 
@@ -127,8 +128,26 @@ const FridgeScreen = () => {
 
   return (
     <View style={pageStyles.container}>
+      <FloatingButtonWithOptions
+        floatingOptions={[
+          {
+            // title: 'Filter',
+            onPress: () => setShowFiltersDrawer(true),
+            closeAfterCall: false,
+            color: '#4C97D9',
+            icon: <Icon name="filter" color="white" size={25} />,
+          },
+          {
+            // title: 'Delete',
+            onPress: () => null,
+            closeAfterCall: false,
+            color: '#d9594c',
+            icon: <Icon name="trash" color="white" size={25} />,
+          },
+        ]}
+      />
       <Searchbar style={{marginBottom: 15}} products={products} />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.filterBtn}
         onPress={() => setShowFiltersDrawer(true)}>
         <Icon name="filter" color="white" size={25} />
@@ -142,7 +161,7 @@ const FridgeScreen = () => {
             <Badge value={1} status="error" />
           </View>
         )}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
       <Drawer
         // fullheight
