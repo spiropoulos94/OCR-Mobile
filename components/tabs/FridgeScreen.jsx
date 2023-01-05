@@ -116,9 +116,9 @@ const FridgeScreen = () => {
   const renderProducts = (products, filteredProducts) => {
     let productsToRender = filteredProducts ? filteredProducts : products;
 
-    let msg = filteredProducts ? 'filteredProducts' : 'products';
-
-    alert(`Deixnei : ${msg}`);
+    // for debugging reasons
+    // let msg = filteredProducts ? 'filteredProducts' : 'products';
+    // alert(`Deixnei : ${msg}`);
 
     return productsToRender.map((p, index) => (
       <ProductCard key={`${p}-${index}`} product={p} />
