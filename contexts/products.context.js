@@ -18,12 +18,12 @@ let initialState = {
     {
       name: 'Cheese',
       expDateTs: 1671317840973,
-      addedOn: 1671317851535,
+      addedOn: 1671317851536,
     },
     {
       name: 'Yogurt',
       expDateTs: 1671317840973,
-      addedOn: 1671317851535,
+      addedOn: 1671317851537,
     },
   ],
   filteredProducts: null,
@@ -66,6 +66,18 @@ const reducer = (state = initialState, action) => {
         products: newProducts,
         filteredProducts: state.filteredProducts
           ? SortProducts(sortOrder, newProducts)
+          : null,
+      });
+    case 'REMOVE_PRODUCT':
+      // let newProducts = [...state.products, payload.product];
+      let arrayWithoutProduct = [
+        ...state.products.filter(p => p.addedOn != payload.product.addedOn),
+      ];
+      console.log({arrayWithoutProduct});
+      return Object.assign({}, state, {
+        products: arrayWithoutProduct,
+        filteredProducts: state.filteredProducts
+          ? SortProducts(sortOrder, arrayWithoutProduct)
           : null,
       });
     case 'FILTER_PRODUCTS':
