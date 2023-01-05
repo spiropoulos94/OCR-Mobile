@@ -14,6 +14,7 @@ import {
   getExpStatusFromDate,
 } from '../../utils/date';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Badge} from '@rneui/themed';
 
 import Drawer from '../Drawer';
 import Filters from '../Filters';
@@ -131,6 +132,16 @@ const FridgeScreen = () => {
         style={styles.filterBtn}
         onPress={() => setShowFiltersDrawer(true)}>
         <Icon name="filter" color="white" size={25} />
+        {filteredProducts && (
+          <View
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: 0,
+            }}>
+            <Badge value={1} status="error" />
+          </View>
+        )}
       </TouchableOpacity>
       <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
       <Drawer

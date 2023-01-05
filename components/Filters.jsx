@@ -80,9 +80,9 @@ const Sort = () => {
   );
 };
 
-const Filters = ({setFilteredProducts, products, setShowFilters}) => {
+const Filters = ({setFilteredProducts, products, setShowFiltersDrawer}) => {
   const closeModal = () => {
-    setShowFilters(false);
+    setShowFiltersDrawer(false);
   };
 
   const {state, dispatch} = useContext(ProductsContext);
