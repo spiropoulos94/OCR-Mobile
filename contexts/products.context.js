@@ -69,7 +69,6 @@ const reducer = (state = initialState, action) => {
           : null,
       });
     case 'REMOVE_PRODUCT':
-      // let newProducts = [...state.products, payload.product];
       let arrayWithoutProduct = [
         ...state.products.filter(p => p.addedOn != payload.product.addedOn),
       ];
