@@ -50,6 +50,7 @@ let initialState = {
         enabled: false,
       },
     ],
+    SEARCH_TERM: null,
   },
 };
 
@@ -92,6 +93,10 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         filters: JSON.parse(JSON.stringify(initialState.filters)),
         filteredProducts: null,
+      });
+    case 'UPDATE_SEARCH_TERM':
+      return Object.assign({}, state, {
+        filters: {...state.filters, SEARCH_TERM: payload},
       });
     default:
       return state;

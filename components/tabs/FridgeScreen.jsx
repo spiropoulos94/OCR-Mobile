@@ -53,12 +53,20 @@ const FridgeScreen = () => {
 
   const {products, filteredProducts, filters} = state;
 
+  const {SEARCH_TERM} = filters;
+
   const renderProducts = (products, filteredProducts) => {
     let productsToRender = filteredProducts ? filteredProducts : products;
 
     // for debugging reasons
     // let msg = filteredProducts ? 'filteredProducts' : 'products';
     // alert(`Deixnei : ${msg}`);
+
+    if (SEARCH_TERM) {
+      productsToRender = productsToRender.filter(p =>
+        p.name.includes(SEARCH_TERM),
+      );
+    }
 
     return productsToRender.map((p, index) => (
       <ProductCard key={`${p}-${index}`} product={p} />

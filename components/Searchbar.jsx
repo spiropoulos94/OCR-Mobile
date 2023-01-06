@@ -7,9 +7,12 @@ import {ProductsContext} from '../contexts/products.context';
 const Searchbar = ({style, products, setFilteredProducts}) => {
   const [input, setInput] = useState('');
 
+  const {state, dispatch} = useContext(ProductsContext);
+
   // apply filtering on input change
   useEffect(() => {
     console.log('Input is changing');
+    dispatch({type: 'UPDATE_SEARCH_TERM', payload: input});
   }, [input]);
 
   return (

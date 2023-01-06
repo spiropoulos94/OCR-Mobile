@@ -65,18 +65,19 @@ const ProductCard = ({product}) => {
           <Icon name="trash" size={30} color="#d9594c" />
         </TouchableOpacity>
       )}
-      leftContent={reset => (
-        <TouchableOpacity
-          onPress={() => handleDelete(product, reset)}
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            color: 'white',
-          }}>
-          <Icon name="trash" size={30} color="#d9594c" />
-        </TouchableOpacity>
-      )}></ListItem.Swipeable>
+      //   leftContent={reset => (
+      //     <TouchableOpacity
+      //       onPress={() => handleDelete(product, reset)}
+      //       style={{
+      //         flex: 1,
+      //         justifyContent: 'center',
+      //         alignItems: 'flex-start',
+      //         color: 'white',
+      //       }}>
+      //       <Icon name="trash" size={30} color="#d9594c" />
+      //     </TouchableOpacity>
+      //   )}
+    ></ListItem.Swipeable>
   );
 };
 export default ProductCard;
