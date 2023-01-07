@@ -50,9 +50,15 @@ const ProductCard = ({product}) => {
   return (
     <ListItem.Swipeable
       Component={() => <ProductCardContent status={status} product={product} />}
-      rightWidth={50}
+      rightWidth={40}
       leftWidth={50}
-      style={{marginBottom: 10}}
+      rightStyle={{
+        // backgroundColor: 'lightyellow',
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        top: 0,
+      }}
       rightContent={reset => (
         <TouchableOpacity
           onPress={() => handleDelete(product, reset)}
