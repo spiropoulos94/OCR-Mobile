@@ -52,13 +52,6 @@ const ProductCard = ({product}) => {
       Component={() => <ProductCardContent status={status} product={product} />}
       rightWidth={40}
       leftWidth={50}
-      rightStyle={{
-        // backgroundColor: 'lightyellow',
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        top: 0,
-      }}
       rightContent={reset => (
         <TouchableOpacity
           onPress={() => handleDelete(product, reset)}
