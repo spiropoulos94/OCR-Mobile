@@ -1,5 +1,6 @@
 import {createContext, useState, useEffect, useReducer} from 'react';
 import {SortProducts} from '../utils/filters';
+import _ from 'lodash';
 
 export const ProductsContext = createContext({
   state: {},
@@ -55,6 +56,7 @@ let initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  state = _.cloneDeep(state);
   const {type, payload} = action;
 
   const sortOrder = state.filters.SORT_OPTIONS.find(o => o.enabled).value;
@@ -91,7 +93,7 @@ const reducer = (state = initialState, action) => {
       });
     case 'CLEAR_FILTERS':
       return Object.assign({}, state, {
-        filters: JSON.parse(JSON.stringify(initialState.filters)),
+        filters: _.cloneDeep(initialState.filters),
         filteredProducts: null,
       });
     case 'UPDATE_SEARCH_TERM':

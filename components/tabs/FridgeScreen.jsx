@@ -91,7 +91,9 @@ const FridgeScreen = () => {
           </View>
         )}
       </TouchableOpacity>
-      <ScrollView>{renderProducts(products, filteredProducts)}</ScrollView>
+      <ScrollView alwaysBounceVertical={false}>
+        {renderProducts(products, filteredProducts)}
+      </ScrollView>
       <Drawer
         // fullheight
         headerFunc={() => dispatch({type: 'CLEAR_FILTERS'})}
