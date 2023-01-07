@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import {pageStyles} from './../../styles/pageStyles';
 import {
@@ -24,6 +25,7 @@ import ProductCard from '../ProductCard';
 //contexts
 
 import {ProductsContext} from '../../contexts/products.context';
+import {Divider} from '@rneui/base';
 
 const styles = StyleSheet.create({
   filterBtn: {
@@ -68,9 +70,11 @@ const FridgeScreen = () => {
       );
     }
 
-    return productsToRender.map((p, index) => (
-      <ProductCard key={`${p.name}-${index}`} product={p} />
-    ));
+    return productsToRender;
+
+    // return productsToRender.map((p, index) => (
+    //   <ProductCard key={`${p.name}-${index}`} product={p} />
+    // ));
   };
 
   return (
@@ -91,9 +95,14 @@ const FridgeScreen = () => {
           </View>
         )}
       </TouchableOpacity>
-      <ScrollView alwaysBounceVertical={false}>
-        {renderProducts(products, filteredProducts)}
-      </ScrollView>
+      <FlatList
+        alwaysBounceVertical={false}
+        data={renderProducts(products, filteredProducts)}
+        renderItem={({item}) => {
+          return <ProductCard product={item} />;
+        }}
+        keyExtractor={(item, index) => `${item.name}-${index}`}
+      />
       <Drawer
         // fullheight
         headerFunc={() => dispatch({type: 'CLEAR_FILTERS'})}
