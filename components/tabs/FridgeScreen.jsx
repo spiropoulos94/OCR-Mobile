@@ -69,7 +69,7 @@ const FridgeScreen = () => {
     }
 
     return productsToRender.map((p, index) => (
-      <ProductCard key={`${p}-${index}`} product={p} />
+      <ProductCard key={`${p.name}-${index}`} product={p} />
     ));
   };
 
