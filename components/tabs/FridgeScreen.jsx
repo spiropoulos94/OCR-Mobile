@@ -66,7 +66,7 @@ const FridgeScreen = () => {
 
     if (SEARCH_TERM) {
       productsToRender = productsToRender.filter(p =>
-        p.name.includes(SEARCH_TERM),
+        p.name.toLowerCase().includes(SEARCH_TERM.toLowerCase()),
       );
     }
 
