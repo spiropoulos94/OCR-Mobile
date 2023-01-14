@@ -1,9 +1,21 @@
 import React, {useState, useRef, useContext} from 'react';
-import {View, Text, ScrollView, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  StyleSheet,
+  Button,
+  Pressable,
+  Alert,
+} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
 import CustomButton from './Button';
 import {ProductsContext} from '../contexts/products.context';
+import TextRecognition from '@react-native-ml-kit/text-recognition';
+
+import {parseDateFromText} from '../utils/date';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -52,6 +64,25 @@ const AddProductForm = () => {
     setExpDate(new Date(e.nativeEvent.timestamp));
   };
 
+  const handlePress = async () => {
+    try {
+      const result = await TextRecognition.recognize(
+        'file:///Users/nikosspiropoulos/Desktop/Image.jpeg',
+      );
+      let totalText = '';
+      for (let block of result.blocks) {
+        totalText += ' ' + block.text;
+        for (let line of block.lines) {
+          totalText += '' + line.text;
+        }
+      }
+
+      let texts = parseDateFromText(totalText);
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
   const addToFridge = () => {
     let product = {
       ...emptyProduct,
@@ -96,6 +127,9 @@ const AddProductForm = () => {
         clickFN={() => addToFridge()}
         disabled={productName.length < 1}
       />
+      <Pressable style={{marginTop: 30}}>
+        <Button onPress={() => handlePress()} title="Toggle OCR" />
+      </Pressable>
     </>
   );
 };

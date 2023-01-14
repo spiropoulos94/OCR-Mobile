@@ -11,7 +11,6 @@ const Searchbar = ({style, products, setFilteredProducts}) => {
 
   // apply filtering on input change
   useEffect(() => {
-    console.log('Input is changing');
     dispatch({type: 'UPDATE_SEARCH_TERM', payload: input});
   }, [input]);
 

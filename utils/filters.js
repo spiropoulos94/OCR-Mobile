@@ -3,13 +3,11 @@ export const SortProducts = (sortOrder, products) => {
   switch (sortOrder) {
     case 'AddedDateAsc':
       // code block
-      console.log('ADDED DATE ASC');
       toBeSorted.sort((a, b) => b.addedOn - a.addedOn);
 
       return toBeSorted;
     // break;
     case 'AddedDateDesc':
-      console.log('ADDED DATE DESC');
       toBeSorted.sort((a, b) => b.addedOn + a.addedOn);
 
       return toBeSorted;

@@ -75,7 +75,6 @@ const reducer = (state = initialState, action) => {
       let arrayWithoutProduct = [
         ...state.products.filter(p => p.addedOn != payload.product.addedOn),
       ];
-      console.log({arrayWithoutProduct});
       return Object.assign({}, state, {
         products: arrayWithoutProduct,
         filteredProducts: state.filteredProducts
@@ -83,7 +82,6 @@ const reducer = (state = initialState, action) => {
           : null,
       });
     case 'FILTER_PRODUCTS':
-      console.log('Filter products running', {sortOrder, products});
       return Object.assign({}, state, {
         filteredProducts: SortProducts(sortOrder, products),
       });
