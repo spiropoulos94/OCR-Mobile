@@ -15,7 +15,7 @@ import CustomButton from './Button';
 import {ProductsContext} from '../contexts/products.context';
 import TextRecognition from '@react-native-ml-kit/text-recognition';
 
-import {parseDateFromText} from '../utils/date';
+import {parseDateFromText, extractDate} from '../utils/date';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -73,17 +73,19 @@ const AddProductForm = () => {
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg',
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8515.jpg'
       );
-      let totalText = '';
+      let totalTexts = [];
       for (let block of result.blocks) {
-        totalText += ' ' + block.text;
+        // totalText += ' ' + block.text;
+        totalTexts.push(block.text);
         for (let line of block.lines) {
-          totalText += '' + line.text;
+          // totalText += '' + line.text;
+          totalTexts.push(line.text);
         }
       }
 
-      console.log(totalText);
-
-      let texts = parseDateFromText(totalText);
+      // let texts = parseDateFromText(totalText);
+      let date = extractDate(totalTexts)[0];
+      console.log('Date => ', date);
     } catch (e) {
       alert(e.message);
     }

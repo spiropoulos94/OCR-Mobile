@@ -7,6 +7,35 @@ import {
 
 import parseDate from 'date-fns/parse';
 
+export const extractDate = texts => {
+  let dates = [];
+  texts.forEach(text => {
+    let dateRegex1 = /\b\d{1,2}[-\/]\d{1,2}[-\/]\d{4}\b/g; // formats: MM-DD-YYYY, DD-MM-YYYY, MM/DD/YYYY, DD/MM/YYYY
+    let dateRegex2 = /\b\d{4}[-\/]\d{1,2}[-\/]\d{1,2}\b/g; // format: YYYY-MM-DD
+    let dateRegex3 = /\b\d{1,2}\s[a-zA-Z]{3}\s\d{4}\b/g; // format: DD MMM YYYY
+    let dateRegex4 = /\b[a-zA-Z]{3}\s\d{1,2},\s\d{4}\b/g; // format: MMM DD, YYYY
+
+    let match;
+    match = text.match(dateRegex1);
+    if (match) {
+      dates.push(...match);
+    }
+    match = text.match(dateRegex2);
+    if (match) {
+      dates.push(...match);
+    }
+    match = text.match(dateRegex3);
+    if (match) {
+      dates.push(...match);
+    }
+    match = text.match(dateRegex4);
+    if (match) {
+      dates.push(...match);
+    }
+  });
+  return dates;
+};
+
 export const parseDateFromText = text => {
   // Define an array to store the found dates
   const dates = [];
