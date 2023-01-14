@@ -68,6 +68,10 @@ const AddProductForm = () => {
     try {
       const result = await TextRecognition.recognize(
         'file:///Users/nikosspiropoulos/Desktop/Image.jpeg',
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg',
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg',
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg',
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8515.jpg'
       );
       let totalText = '';
       for (let block of result.blocks) {
@@ -76,6 +80,8 @@ const AddProductForm = () => {
           totalText += '' + line.text;
         }
       }
+
+      console.log(totalText);
 
       let texts = parseDateFromText(totalText);
     } catch (e) {
