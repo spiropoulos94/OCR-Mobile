@@ -7,6 +7,11 @@ import {
 
 import parseDate from 'date-fns/parse';
 
+export function stringToTimestamp(dateString) {
+  // return parseDateFromString(dateString);
+  return new Date(parseDateFromString(dateString)).getTime();
+}
+
 export const extractDate = texts => {
   let dates = [];
   texts.forEach(text => {
@@ -36,7 +41,7 @@ export const extractDate = texts => {
   return dates;
 };
 
-export const parseDateFromText = text => {
+export const parseDateFromString = text => {
   // Define an array to store the found dates
   const dates = [];
   // Define an array of all possible date formats

@@ -15,7 +15,7 @@ import CustomButton from './Button';
 import {ProductsContext} from '../contexts/products.context';
 import TextRecognition from '@react-native-ml-kit/text-recognition';
 
-import {parseDateFromText, extractDate} from '../utils/date';
+import {parseDateFromText, extractDate, stringToTimestamp} from '../utils/date';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -86,6 +86,8 @@ const AddProductForm = () => {
       // let texts = parseDateFromText(totalText);
       let date = extractDate(totalTexts)[0];
       console.log('Date => ', date);
+      // timestamp is wrong
+      console.log('Date TS => ', `${stringToTimestamp(date)}`);
     } catch (e) {
       alert(e.message);
     }
