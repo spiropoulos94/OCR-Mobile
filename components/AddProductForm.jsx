@@ -66,13 +66,14 @@ const AddProductForm = () => {
 
   const handlePress = async () => {
     try {
-      const result = await TextRecognition.recognize(
-        'file:///Users/nikosspiropoulos/Desktop/Image.jpeg',
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg',
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg',
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg',
+      const result = await TextRecognition
+        .recognize
+        // 'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg', // pass
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg', // fail 0 results
+        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg', // fail
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8515.jpg'
-      );
+        ();
       let totalTexts = [];
       for (let block of result.blocks) {
         // totalText += ' ' + block.text;
