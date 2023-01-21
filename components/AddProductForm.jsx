@@ -117,7 +117,6 @@ const AddProductForm = () => {
       console.log('Total texts -> ', totalTexts);
       let date = extractDate(totalTexts)[0];
       console.log('Date => ', date);
-      // timestamp is wrong
       console.log('Date TS => ', `${stringToTimestamp(date)}`);
     } catch (e) {
       console.log(e.message);
