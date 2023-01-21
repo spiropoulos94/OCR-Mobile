@@ -7,6 +7,8 @@ import {
 
 import parseDate from 'date-fns/parse';
 
+import {removeDuplicates} from './utils';
+
 export function stringToTimestamp(dateString) {
   // return parseDateFromString(dateString);
   return new Date(parseDateFromString(dateString)).getTime();
@@ -64,7 +66,12 @@ export const extractDate = texts => {
       }
     }
   });
-  return dates;
+  if (dates.length) {
+    let uniqueDates = removeDuplicates(dates);
+    return uniqueDates;
+  } else {
+    return null;
+  }
 };
 
 export const parseDateFromString = text => {
