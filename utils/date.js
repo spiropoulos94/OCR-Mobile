@@ -28,10 +28,11 @@ function extractTimestamp(dateString) {
 export const extractDate = texts => {
   let dates = [];
   texts.forEach(text => {
-    let dateRegex1 = /\b\d{1,2}[-\/]\d{1,2}[-\/]\d{4}\b/g; // formats: MM-DD-YYYY, DD-MM-YYYY, MM/DD/YYYY, DD/MM/YYYY
+    let dateRegex1 = /\b\d{1,2}[-\/]\d{1,2}[-\/]\d{2,4}\b/g; // formats: MM-DD-YY, DD-MM-YY, MM/DD/YY, DD/MM/YY, MM-DD-YYYY, DD-MM-YYYY, MM/DD/YYYY, DD/MM/YYYY
     let dateRegex2 = /\b\d{4}[-\/]\d{1,2}[-\/]\d{1,2}\b/g; // format: YYYY-MM-DD
     let dateRegex3 = /\b\d{1,2}\s[a-zA-Z]{3}\s\d{4}\b/g; // format: DD MMM YYYY
     let dateRegex4 = /\b[a-zA-Z]{3}\s\d{1,2},\s\d{4}\b/g; // format: MMM DD, YYYY
+    let dateRegex5 = /\b\d{1,2}[-/]\d{4}\b/g; // format: MM/YYYY or DD/YYYY
 
     let match;
 
@@ -48,6 +49,10 @@ export const extractDate = texts => {
       dates.push(...match);
     }
     match = text.match(dateRegex4);
+    if (match) {
+      dates.push(...match);
+    }
+    match = text.match(dateRegex5);
     if (match) {
       dates.push(...match);
     }
