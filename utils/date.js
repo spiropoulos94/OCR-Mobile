@@ -88,6 +88,7 @@ export const parseDateFromString = text => {
     'yyyy.MM.dd',
     'MM.dd.yyyy',
     'dd.MM.yyyy',
+    'dd/MM/yy',
   ];
   // Iterate through each date format
   dateFormats.forEach(format => {

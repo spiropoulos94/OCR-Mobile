@@ -96,8 +96,8 @@ const AddProductForm = () => {
   const handlePress = async () => {
     try {
       const result = await TextRecognition.recognize(
-        // img,
-        'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
+        img,
+        // 'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
         // 'file:///Users/nikosspiropoulos/Library/Developer/CoreSimulator/Devices/76618915-A5FE-4706-9C78-9141A7D68297/data/Containers/Data/Application/8792F630-3580-4131-931B-01572F101888/tmp/6A7BA3F4-432E-4CC6-AD6F-BDB87E95FFB1.jpg', // pass
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg', // pass
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg', // fail 0 results
@@ -117,13 +117,15 @@ const AddProductForm = () => {
       // console.log('Total texts -> ', totalTexts);
       // // let date = extractDate(totalTexts)[0];
       // console.log('Date => ', date);
-      // console.log('Date TS => ', `${stringToTimestamp(date)}`);
 
       let dates = extractDate(totalTexts);
 
       console.log('');
       console.log('Total Texts => ', totalTexts);
       console.log('Dates => ', dates);
+      dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
+      console.log('expDate =>', expDate);
+      // console.log('Date TS => ', `${stringToTimestamp(date)}`);
     } catch (e) {
       console.log(e.message);
       alert('Error: Check console');
