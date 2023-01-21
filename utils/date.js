@@ -12,6 +12,19 @@ export function stringToTimestamp(dateString) {
   return new Date(parseDateFromString(dateString)).getTime();
 }
 
+function extractTimestamp(dateString) {
+  var dateRegex =
+    /(\d{2})([\/|\.|\-|#|0|1|2])(\d{2})([\/|\.|\-|#|0|1|2])(\d{4})/;
+  var match = dateRegex.exec(dateString);
+  if (match) {
+    var day = match[1];
+    var month = match[3];
+    var year = match[5];
+    return new Date(year, month - 1, day);
+  }
+  return null;
+}
+
 export const extractDate = texts => {
   let dates = [];
   texts.forEach(text => {
@@ -21,6 +34,7 @@ export const extractDate = texts => {
     let dateRegex4 = /\b[a-zA-Z]{3}\s\d{1,2},\s\d{4}\b/g; // format: MMM DD, YYYY
 
     let match;
+
     match = text.match(dateRegex1);
     if (match) {
       dates.push(...match);
@@ -36,6 +50,13 @@ export const extractDate = texts => {
     match = text.match(dateRegex4);
     if (match) {
       dates.push(...match);
+    }
+    if (!match) {
+      let ts = extractTimestamp(text);
+      if (ts) {
+        let date = convertTimestampToDate(ts);
+        dates.push(date);
+      }
     }
   });
   return dates;

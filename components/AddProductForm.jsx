@@ -114,10 +114,16 @@ const AddProductForm = () => {
         }
       }
       // let texts = parseDateFromText(totalText);
-      console.log('Total texts -> ', totalTexts);
-      let date = extractDate(totalTexts)[0];
-      console.log('Date => ', date);
-      console.log('Date TS => ', `${stringToTimestamp(date)}`);
+      // console.log('Total texts -> ', totalTexts);
+      // // let date = extractDate(totalTexts)[0];
+      // console.log('Date => ', date);
+      // console.log('Date TS => ', `${stringToTimestamp(date)}`);
+
+      let dates = extractDate(totalTexts);
+
+      console.log('');
+      console.log('Total Texts => ', totalTexts);
+      console.log('Dates => ', dates);
     } catch (e) {
       console.log(e.message);
       alert('Error: Check console');
