@@ -8,6 +8,7 @@ import {
   Button,
   Pressable,
   Alert,
+  Image,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
@@ -60,16 +61,44 @@ const AddProductForm = () => {
   const [productName, setProductName] = useState('');
   const [expDate, setExpDate] = useState(new Date());
 
+  const [img, setImage] = useState(
+    'file:///Users/nikosspiropoulos/Library/Developer/CoreSimulator/Devices/76618915-A5FE-4706-9C78-9141A7D68297/data/Containers/Data/Application/8792F630-3580-4131-931B-01572F101888/tmp/6A7BA3F4-432E-4CC6-AD6F-BDB87E95FFB1.jpg',
+  );
+
   const {dispatch} = useContext(ProductsContext);
 
   const handleDateChange = e => {
     setExpDate(new Date(e.nativeEvent.timestamp));
   };
+  ``;
+  const options = {
+    title: 'Select Image',
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+    takePhotoButtonTitle: 'Take Photo',
+    chooseFromLibraryButtonTitle: 'Choose from Library',
+    cancelButtonTitle: 'Cancel',
+  };
+
+  const selectImageFromLib = async () => {
+    let returnV = launchImageLibrary(options, res => {
+      console.log(res);
+      setImage(res.assets[0].uri);
+      return res;
+    });
+    console.log('');
+    console.log({returnV});
+    // try {
+  };
 
   const handlePress = async () => {
     try {
       const result = await TextRecognition.recognize(
-        'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
+        img,
+        // 'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
+        // 'file:///Users/nikosspiropoulos/Library/Developer/CoreSimulator/Devices/76618915-A5FE-4706-9C78-9141A7D68297/data/Containers/Data/Application/8792F630-3580-4131-931B-01572F101888/tmp/6A7BA3F4-432E-4CC6-AD6F-BDB87E95FFB1.jpg', // pass
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg', // pass
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg', // fail 0 results
         // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg', // fail
@@ -84,8 +113,8 @@ const AddProductForm = () => {
           totalTexts.push(line.text);
         }
       }
-
       // let texts = parseDateFromText(totalText);
+      console.log('Total texts -> ', totalTexts);
       let date = extractDate(totalTexts)[0];
       console.log('Date => ', date);
       // timestamp is wrong
@@ -143,6 +172,22 @@ const AddProductForm = () => {
       <Pressable style={{marginTop: 30}}>
         <Button onPress={() => handlePress()} title="Toggle OCR" />
       </Pressable>
+      <Pressable style={{marginTop: 30}}>
+        <Button
+          onPress={() => selectImageFromLib()}
+          title="Select Image From Library"
+        />
+      </Pressable>
+      <Image
+        style={{
+          width: '100%',
+          height: 100,
+          resizeMode: 'contain',
+        }}
+        source={{
+          uri: img,
+        }}
+      />
     </>
   );
 };
