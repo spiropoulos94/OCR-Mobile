@@ -59,5 +59,9 @@
 		<string>fonts/MaterialCommunityIcons.ttf</string>
 		<string>fonts/MaterialIcons.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
+	<key>NSMicrophoneUsageDescription</key>
 </dict>
 </plist>

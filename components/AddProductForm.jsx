@@ -17,6 +17,8 @@ import TextRecognition from '@react-native-ml-kit/text-recognition';
 
 import {parseDateFromText, extractDate, stringToTimestamp} from '../utils/date';
 
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
 const showToast = (product, type = 'success') => {
   let text =
     type === 'success' ? `Added ${product} !` : `Could not add ${product} !`;
