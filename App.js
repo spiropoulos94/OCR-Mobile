@@ -5,7 +5,6 @@ import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import TextRecognition from '@react-native-ml-kit/text-recognition';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
 import SignIn from './components/tabs/auth/SignIn.jsx';
