@@ -44,11 +44,10 @@ const TestTabScreen = () => {
 
     const handlePress = async () => {
         await ImagePicker.openPicker({
-            width: 300,
-            height: 400,
+            width: 150,
+            height: 100,
             cropping: true
           }).then( async (image) => {
-            // setImg(image.sourceURL)
 
             const {width, height, x, y} = image.cropRect
 
