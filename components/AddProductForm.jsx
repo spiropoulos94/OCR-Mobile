@@ -83,17 +83,22 @@ const AddProductForm = () => {
   };
 
   const selectImageFromLib = async () => {
+    console.clear()
+
     let returnV = await launchImageLibrary(options, res => {
       setImage(res.assets[0].uri);
+      console.log("Setting image as ", res.assets[0].uri)
       return res;
     });
   };
 
   const handlePress = async () => {
+    console.log("Ready to parse imagec => ", img)
     try {
       const result = await TextRecognition.recognize(
         img,
       );
+      console.log({result})
       let totalTexts = [];
       for (let block of result.blocks) {
         // totalText += ' ' + block.text;
@@ -104,9 +109,15 @@ const AddProductForm = () => {
         }
       }
 
-      let dates = extractDate(totalTexts);
+      console.log({totalTexts})
 
-      dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
+      if(totalTexts && totalTexts.length > 0){
+        let dates = extractDate(totalTexts);
+        if(dates && dates.length > 0){
+          dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
+        }
+      }
+
     } catch (e) {
       console.log(e.message);
       alert('Error: Check console');
