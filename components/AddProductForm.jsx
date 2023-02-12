@@ -83,26 +83,16 @@ const AddProductForm = () => {
   };
 
   const selectImageFromLib = async () => {
-    let returnV = launchImageLibrary(options, res => {
-      console.log(res);
+    let returnV = await launchImageLibrary(options, res => {
       setImage(res.assets[0].uri);
       return res;
     });
-    console.log('');
-    console.log({returnV});
-    // try {
   };
 
   const handlePress = async () => {
     try {
       const result = await TextRecognition.recognize(
         img,
-        // 'file:///Users/nikosspiropoulos/Desktop/Image.jpeg', // pass
-        // 'file:///Users/nikosspiropoulos/Library/Developer/CoreSimulator/Devices/76618915-A5FE-4706-9C78-9141A7D68297/data/Containers/Data/Application/8792F630-3580-4131-931B-01572F101888/tmp/6A7BA3F4-432E-4CC6-AD6F-BDB87E95FFB1.jpg', // pass
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/1copy.jpg', // pass
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/3copy.jpg', // fail 0 results
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8516.jpg', // fail
-        // 'file:///Users/nikosspiropoulos/Development/Projects/OCR/new_ocr_test/samples/IMG_8515.jpg'
       );
       let totalTexts = [];
       for (let block of result.blocks) {
@@ -113,19 +103,10 @@ const AddProductForm = () => {
           totalTexts.push(line.text);
         }
       }
-      // let texts = parseDateFromText(totalText);
-      // console.log('Total texts -> ', totalTexts);
-      // // let date = extractDate(totalTexts)[0];
-      // console.log('Date => ', date);
 
       let dates = extractDate(totalTexts);
 
-      console.log('');
-      console.log('Total Texts => ', totalTexts);
-      console.log('Dates => ', dates);
       dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
-      console.log('expDate =>', expDate);
-      // console.log('Date TS => ', `${stringToTimestamp(date)}`);
     } catch (e) {
       console.log(e.message);
       alert('Error: Check console');
