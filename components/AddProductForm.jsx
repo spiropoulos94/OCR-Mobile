@@ -16,7 +16,7 @@ import CustomButton from './Button';
 import {ProductsContext} from '../contexts/products.context';
 import TextRecognition from '@react-native-ml-kit/text-recognition';
 
-import {parseDateFromText, extractDate, stringToTimestamp} from '../utils/date';
+import {parseDateFromText, extractDateFromTexts, stringToTimestamp} from '../utils/date';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
@@ -112,7 +112,7 @@ const AddProductForm = () => {
       console.log({totalTexts})
 
       if(totalTexts && totalTexts.length > 0){
-        let dates = extractDate(totalTexts);
+        let dates = extractDateFromTexts(totalTexts);
         if(dates && dates.length > 0){
           dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
         }

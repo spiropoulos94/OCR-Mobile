@@ -1,7 +1,6 @@
 import {
   formatDistance,
   differenceInCalendarDays,
-  // parseDate,
   isValid,
 } from 'date-fns';
 
@@ -10,7 +9,6 @@ import parseDate from 'date-fns/parse';
 import {removeDuplicates} from './utils';
 
 export function stringToTimestamp(dateString) {
-  // return parseDateFromString(dateString);
   return new Date(parseDateFromString(dateString)).getTime();
 }
 
@@ -27,7 +25,7 @@ function extractTimestamp(dateString) {
   return null;
 }
 
-export const extractDate = texts => {
+export const extractDateFromTexts = texts => {
   let dates = [];
   texts.forEach(text => {
     let dateRegex1 = /\b\d{1,2}[-\/]\d{1,2}[-\/]\d{2,4}\b/g; // formats: MM-DD-YY, DD-MM-YY, MM/DD/YY, DD/MM/YY, MM-DD-YYYY, DD-MM-YYYY, MM/DD/YYYY, DD/MM/YYYY
