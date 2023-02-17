@@ -12,6 +12,7 @@ import SignUp from './components/tabs/auth/SignUp.jsx';
 
 import AddToFridgeScreen from './components/tabs/AddToFridge.jsx';
 import FridgeScreen from './components/tabs/FridgeScreen.jsx';
+import CloudVisionTab from './components/tabs/CloudVisionTab';
 import TestTabScreen from './components/tabs/TestTab.jsx';
 import Toast from 'react-native-toast-message';
 import Drawer from './components/Drawer.jsx';
@@ -31,9 +32,12 @@ function App() {
           {isSignedIn ? (
             <>
               <Tab.Screen name="Fridge">{() => <FridgeScreen />}</Tab.Screen>
-              <Tab.Screen name="Test">{() => <TestTabScreen />}</Tab.Screen>
+              {/* <Tab.Screen name="Test">{() => <TestTabScreen />}</Tab.Screen> */}
               <Tab.Screen name="Add to Fridge">
                 {() => <AddToFridgeScreen />}
+              </Tab.Screen>
+              <Tab.Screen name="Cloud Vision API">
+                {() => <CloudVisionTab />}
               </Tab.Screen>
             </>
           ) : (
