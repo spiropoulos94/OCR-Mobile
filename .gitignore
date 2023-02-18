@@ -6,6 +6,8 @@
 
 .env
 
+/notes
+
 # Xcode
 #
 build/
