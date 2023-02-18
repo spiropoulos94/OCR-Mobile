@@ -4,6 +4,8 @@
 
 .vscode
 
+.env
+
 # Xcode
 #
 build/
