@@ -1,5 +1,5 @@
 import {View, Text} from "react-native"
-import {CLOUD_VISION_API_KEY} from "@env"
+import {CLOUD_VISION_API_KEY, API_KEY, API_URL} from "@env"
 import { Button } from "@rneui/base"
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -17,7 +17,7 @@ const getImageInBase64 = async () => {
 
 const CloudVisionTab = () => {
 
-    console.log({CLOUD_VISION_API_KEY})
+    console.log({CLOUD_VISION_API_KEY, API_KEY, API_URL})
 
     const handlePress = async () => {
       let res = await getImageInBase64()
