@@ -1,15 +1,14 @@
-import {View, Text, StyleSheet} from "react-native"
+import {View, Text, StyleSheet, SafeAreaView} from "react-native"
 
 const ApiInfoHeaderBar = () => {
-    return <View style={styles.wrapper}>
+    return <SafeAreaView style={styles.wrapper}>
                 <Text>Test</Text>
-            </View>
+            </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
     wrapper:{
         backgroundColor: "red",
-        marginTop:40
     }
 })
 
