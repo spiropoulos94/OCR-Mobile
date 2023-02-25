@@ -16,6 +16,7 @@ import CloudVisionTab from './components/tabs/CloudVisionTab';
 import TestTabScreen from './components/tabs/TestTab.jsx';
 import Toast from 'react-native-toast-message';
 import Drawer from './components/Drawer.jsx';
+import ApiInfoHeaderBar from './components/ApiInfoHeaderBar.jsx';
 
 // contexts
 import {ProductsProvider} from './contexts/products.context';
@@ -24,9 +25,11 @@ const Tab = createBottomTabNavigator();
 
 function App() {
   const isSignedIn = true;
+  const isDev = true;
 
   return (
     <ProductsProvider>
+      {isDev && <ApiInfoHeaderBar/>}
       <NavigationContainer>
         <Tab.Navigator>
           {isSignedIn ? (
