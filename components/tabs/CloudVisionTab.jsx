@@ -2003,7 +2003,7 @@ const getImageInBase64 = async () => {
       return base64
 }
 
-function generateBody(image) {
+function generateReqBody(image) {
     const body = {
       requests: [
         {
@@ -2022,13 +2022,13 @@ function generateBody(image) {
     return body;
   }
 
-async function callGoogleVisionAsync(image) {
+export async function callGoogleVisionAsync(image) {
 
     if (isTest){
         return mockResponseJSON
     }
 
-    const body = generateBody(image); //pass in our image for the payload
+    const body = generateReqBody(image); //pass in our image for the payload
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
