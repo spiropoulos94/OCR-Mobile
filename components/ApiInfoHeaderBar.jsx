@@ -1,12 +1,13 @@
 import {View, Text, StyleSheet, SafeAreaView} from "react-native"
 
 const ApiInfoHeaderBar = () => {
-    return <SafeAreaView>
-        <View style={styles.wrapper}>
-
+    return (
+        <SafeAreaView>
+            <View style={styles.wrapper}>
                 <Text>Test</Text>
-        </View>
-            </SafeAreaView>
+            </View>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
