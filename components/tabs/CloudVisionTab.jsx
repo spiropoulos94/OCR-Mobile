@@ -65,7 +65,18 @@ const getMetrics = async () => {
   const projectId = PROJECT_ID;
   const metricFilter = 'metric.type="serviceruntime.googleapis.com/api/request_count"';
   //ftiakse to timerange na einai dynamiko
-  const timeRange = 'interval.start_time=2023-02-10T00:00:00.000Z&interval.end_time=2023-03-12T00:00:00.000Z';
+  // Get the current date
+const currentDate = new Date();
+// Calculate the start date as 30 days ago
+const startDate = new Date(currentDate.getTime() - (30 * 24 * 60 * 60 * 1000));
+// Format the dates as ISO strings
+const startTime = startDate.toISOString();
+const endTime = currentDate.toISOString();
+
+// Construct the time range string
+const timeRange = `interval.start_time=${startTime}&interval.end_time=${endTime}`;
+
+// const timeRange = 'interval.start_time=2023-02-10T00:00:00.000Z&interval.end_time=2023-03-12T00:00:00.000Z';
 
   const apiUrl = `https://monitoring.googleapis.com/v3/projects/${projectId}/timeSeries?filter=${metricFilter}&${timeRange}`;
 
@@ -109,6 +120,7 @@ const CloudVisionTab = () => {
         })
       }
     })
+    console.log({total})
   }
 
   return (<View>
