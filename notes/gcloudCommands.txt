@@ -1,0 +1,2 @@
+Get access token:
+gcloud auth application-default print-access-token
