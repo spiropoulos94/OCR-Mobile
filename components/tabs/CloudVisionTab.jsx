@@ -1,8 +1,10 @@
+import { useContext } from "react"
 import { View, Text } from "react-native"
 import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID, ACCESS_TOKEN } from "@env"
 import { Button } from "@rneui/base"
 import ImagePicker from 'react-native-image-crop-picker';
 import mockMonitorData from "../../mock.json"
+import { MonitoringContext } from "../../contexts/monitor.context"
 
 const isTest = false
 
@@ -113,6 +115,8 @@ const getMetrics = async () => {
 
 const CloudVisionTab = () => {
 
+  const { state, dispatch } = useContext(MonitoringContext);
+
   const handlePress = async () => {
     try {
       let image = await getImageInBase64()
@@ -148,6 +152,7 @@ const CloudVisionTab = () => {
         })
       })
       console.log({ totalRequests })
+      dispatch({ type: "UPDATE_MONITORING", payload: totalRequests })
     } catch (e) {
       alert(e.message)
       console.log(e)
