@@ -67,7 +67,7 @@ const getMetrics = async () => {
     }
 
     // ftiakse to access token
-    const accessToken = '';
+    const accessToken = ""
     const projectId = PROJECT_ID;
     const metricFilter = 'metric.type="serviceruntime.googleapis.com/api/request_count"';
     //ftiakse to timerange na einai dynamiko
@@ -127,15 +127,27 @@ const CloudVisionTab = () => {
     try {
       let monitorData = await getMetrics()
       let total = 0
+      let totalRequests = {
+        vision:0,
+        monitoring:0
+      }
       monitorData.timeSeries.map(ts => {
-        if (ts.resource.labels.service.includes("vision")) {
-
-          ts.points.forEach(p => {
-            total += parseInt(p.value.int64Value)
-          })
+        let key = ""
+        switch(true) {
+          case ts.resource.labels.service.includes("vision"):
+            key = "vision"
+            break;
+          case ts.resource.labels.service.includes("monitoring"):
+            key = "monitoring"
+            break;
+          default:
+            // do something if myProperty does not contain either "string one" or "string two"
         }
+          ts.points.forEach(p => {
+            totalRequests[key] += parseInt(p.value.int64Value)
+          })
       })
-      console.log({total})
+      console.log({totalRequests})
     }catch(e){
       alert(e.message)
       console.log(e)
