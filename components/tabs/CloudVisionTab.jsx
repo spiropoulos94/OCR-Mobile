@@ -117,7 +117,7 @@ const CloudVisionTab = () => {
     try {
       let image = await getImageInBase64()
       let test = await callGoogleVisionAsync(image)
-    }catch(e){
+    } catch (e) {
       alert(e.message)
       console.log(e)
     }
@@ -128,12 +128,12 @@ const CloudVisionTab = () => {
       let monitorData = await getMetrics()
       let total = 0
       let totalRequests = {
-        vision:0,
-        monitoring:0
+        vision: 0,
+        monitoring: 0
       }
       monitorData.timeSeries.map(ts => {
         let key = ""
-        switch(true) {
+        switch (true) {
           case ts.resource.labels.service.includes("vision"):
             key = "vision"
             break;
@@ -141,14 +141,14 @@ const CloudVisionTab = () => {
             key = "monitoring"
             break;
           default:
-            // do something if myProperty does not contain either "string one" or "string two"
+          // do something if myProperty does not contain either "string one" or "string two"
         }
-          ts.points.forEach(p => {
-            totalRequests[key] += parseInt(p.value.int64Value)
-          })
+        ts.points.forEach(p => {
+          totalRequests[key] += parseInt(p.value.int64Value)
+        })
       })
-      console.log({totalRequests})
-    }catch(e){
+      console.log({ totalRequests })
+    } catch (e) {
       alert(e.message)
       console.log(e)
     }
