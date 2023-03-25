@@ -4,17 +4,23 @@ import { Button } from "@rneui/base"
 import ImagePicker from 'react-native-image-crop-picker';
 import mockMonitorData from "../../mock.json"
 
-const isTest = true
+const isTest = false
 
 const getImageInBase64 = async () => {
-  let base64 = await ImagePicker.openPicker({
-    width: 150,
-    height: 100,
-    cropping: true,
-    includeBase64: true,
-  }).then(image => image.data);
+  try {
+    let base64 = await ImagePicker.openPicker({
+      width: 150,
+      height: 100,
+      cropping: true,
+      includeBase64: true,
+    }).then(image => image.data);
 
-  return base64
+    return base64
+  } catch (e) {
+    console.log(e.message)
+    throw new Error(`error in getImageInBase64: ${e.message}`)
+  }
+
 }
 
 function generateReqBody(image) {
@@ -55,72 +61,85 @@ export async function callGoogleVisionAsync(image) {
 }
 
 const getMetrics = async () => {
+  try {
+    if (isTest) {
+      return mockMonitorData
+    }
 
-  if (isTest) {
-    return mockMonitorData
+    // ftiakse to access token
+    const accessToken = '';
+    const projectId = PROJECT_ID;
+    const metricFilter = 'metric.type="serviceruntime.googleapis.com/api/request_count"';
+    //ftiakse to timerange na einai dynamiko
+    // Get the current date
+    const currentDate = new Date();
+    // Calculate the start date as 30 days ago
+    const startDate = new Date(currentDate.getTime() - (30 * 24 * 60 * 60 * 1000));
+    // Format the dates as ISO strings
+    const startTime = startDate.toISOString();
+    const endTime = currentDate.toISOString();
+
+    // Construct the time range string
+    const timeRange = `interval.start_time=${startTime}&interval.end_time=${endTime}`;
+
+    // const timeRange = 'interval.start_time=2023-02-10T00:00:00.000Z&interval.end_time=2023-03-12T00:00:00.000Z';
+
+    const apiUrl = `https://monitoring.googleapis.com/v3/projects/${projectId}/timeSeries?filter=${metricFilter}&${timeRange}`;
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+
+
+    let data = await response.json()
+
+    let cloudVisionRequests = 0
+
+    data.timeSeries.map(ts => {
+      if (ts.resource.labels.service.includes("vision")) {
+        ts.points.forEach(p => {
+          cloudVisionRequests += parseInt(p.value.int64Value)
+        })
+      }
+    })
+
+    return data
+  } catch (e) {
+    throw new Error(`error in get metrics: ${e.message}`)
   }
-
-  // ftiakse to access token
-  const accessToken = '';
-  const projectId = PROJECT_ID;
-  const metricFilter = 'metric.type="serviceruntime.googleapis.com/api/request_count"';
-  //ftiakse to timerange na einai dynamiko
-  // Get the current date
-const currentDate = new Date();
-// Calculate the start date as 30 days ago
-const startDate = new Date(currentDate.getTime() - (30 * 24 * 60 * 60 * 1000));
-// Format the dates as ISO strings
-const startTime = startDate.toISOString();
-const endTime = currentDate.toISOString();
-
-// Construct the time range string
-const timeRange = `interval.start_time=${startTime}&interval.end_time=${endTime}`;
-
-// const timeRange = 'interval.start_time=2023-02-10T00:00:00.000Z&interval.end_time=2023-03-12T00:00:00.000Z';
-
-  const apiUrl = `https://monitoring.googleapis.com/v3/projects/${projectId}/timeSeries?filter=${metricFilter}&${timeRange}`;
-
-  const response = await fetch(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-
-
-  let data = await response.json()
-
-  let cloudVisionRequests = 0
-
-  data.timeSeries.map(ts => {
-    if (ts.resource.labels.service.includes("vision")) {
-      ts.points.forEach(p => {
-        cloudVisionRequests += parseInt(p.value.int64Value)
-      })
-    }
-  })
-
-  return data
 }
 
 const CloudVisionTab = () => {
 
   const handlePress = async () => {
-    let image = await getImageInBase64()
-    let test = await callGoogleVisionAsync(image)
+    try {
+      let image = await getImageInBase64()
+      let test = await callGoogleVisionAsync(image)
+    }catch(e){
+      alert(e.message)
+      console.log(e)
+    }
   }
 
   const handlePressSecondary = async () => {
-    let monitorData = await getMetrics()
-    let total = 0
-    monitorData.timeSeries.map(ts => {
-      if (ts.resource.labels.service.includes("vision")) {
+    try {
+      let monitorData = await getMetrics()
+      let total = 0
+      monitorData.timeSeries.map(ts => {
+        if (ts.resource.labels.service.includes("vision")) {
 
-        ts.points.forEach(p => {
-          total += parseInt(p.value.int64Value)
-        })
-      }
-    })
-    console.log({total})
+          ts.points.forEach(p => {
+            total += parseInt(p.value.int64Value)
+          })
+        }
+      })
+      console.log({total})
+    }catch(e){
+      alert(e.message)
+      console.log(e)
+    }
   }
 
   return (<View>
