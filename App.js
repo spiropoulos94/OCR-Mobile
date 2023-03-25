@@ -20,7 +20,7 @@ import ApiInfoHeaderBar from './components/ApiInfoHeaderBar.jsx';
 
 // contexts
 import { ProductsProvider } from './contexts/products.context';
-import { MonitoringProvider } from './contexts/products.context';
+import { MonitoringProvider } from './contexts/monitor.context';
 
 const Tab = createBottomTabNavigator();
 
