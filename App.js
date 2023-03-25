@@ -24,6 +24,7 @@ import {ProductsProvider} from './contexts/products.context';
 const Tab = createBottomTabNavigator();
 
 function App() {
+  console.clear()
   const isSignedIn = true;
   const isDev = true;
 

@@ -1,5 +1,5 @@
 import { View, Text } from "react-native"
-import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID } from "@env"
+import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID, ACCESS_TOKEN } from "@env"
 import { Button } from "@rneui/base"
 import ImagePicker from 'react-native-image-crop-picker';
 import mockMonitorData from "../../mock.json"
@@ -67,7 +67,7 @@ const getMetrics = async () => {
     }
 
     // ftiakse to access token
-    const accessToken = ""
+    const accessToken = ACCESS_TOKEN;
     const projectId = PROJECT_ID;
     const metricFilter = 'metric.type="serviceruntime.googleapis.com/api/request_count"';
     //ftiakse to timerange na einai dynamiko
