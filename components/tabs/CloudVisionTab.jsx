@@ -1,9 +1,10 @@
 import { useContext } from "react"
 import { View, Text } from "react-native"
-import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID, ACCESS_TOKEN } from "@env"
+import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID } from "@env"
 import { Button } from "@rneui/base"
 import ImagePicker from 'react-native-image-crop-picker';
 import mockMonitorData from "../../mock.json"
+import { ACCESS_TOKEN } from "../../env.json"
 import { MonitoringContext } from "../../contexts/monitor.context"
 
 const isTest = false
@@ -46,6 +47,8 @@ function generateReqBody(image) {
 }
 
 export async function callGoogleVisionAsync(image) {
+
+  console.log("callGoogleCloud runs")
 
   if (isTest) {
     return mockResponseJSON
@@ -125,7 +128,9 @@ const CloudVisionTab = () => {
   const handlePress = async () => {
     try {
       let image = await getImageInBase64()
-      let test = await callGoogleVisionAsync(image)
+      if (image) {
+        let test = await callGoogleVisionAsync(image)
+      }
     } catch (e) {
       alert(e.message)
       console.log(e)

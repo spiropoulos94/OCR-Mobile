@@ -6,6 +6,7 @@
 
 .env
 mock.json
+env.json
 
 # Xcode
 #
