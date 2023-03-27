@@ -9,8 +9,8 @@ const ApiInfoHeaderBar = () => {
     return (
         <SafeAreaView>
             <View style={styles.wrapper}>
-                <Text>Monitoring: {state.monitoring}</Text>
-                <Text>Vision: {state.vision}</Text>
+                <Text style={styles.text}>Monitoring: {state.monitoring}</Text>
+                <Text style={styles.text}>Vision: {state.vision}</Text>
             </View>
         </SafeAreaView>
     )
@@ -22,7 +22,12 @@ const styles = StyleSheet.create({
         padding: 10,
         borderWidth: 1,
         display: 'flex',
-        flexDirection: "row"
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: 80
+    },
+    text: {
+        fontWeight: "bold"
     }
 })
 
