@@ -19,8 +19,9 @@ const getImageInBase64 = async () => {
 
     return base64
   } catch (e) {
-    console.log(e.message)
-    throw new Error(`error in getImageInBase64: ${e.message}`)
+    if (e.code != "E_PICKER_CANCELLED") {
+      throw new Error(`error in getImageInBase64: ${e.message}`)
+    }
   }
 
 }
