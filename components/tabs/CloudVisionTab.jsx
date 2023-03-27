@@ -121,6 +121,31 @@ const getMetrics = async () => {
   }
 }
 
+const extractMetricsFromData = (monitorData) => {
+  let totalRequests = {
+    vision: 0,
+    monitoring: 0
+  }
+  monitorData.timeSeries.map(ts => {
+    let key = ""
+    switch (true) {
+      case ts.resource.labels.service.includes("vision"):
+        key = "vision"
+        break;
+      case ts.resource.labels.service.includes("monitoring"):
+        key = "monitoring"
+        break;
+      default:
+      // do something if myProperty does not contain either "string one" or "string two"
+    }
+    ts.points.forEach(p => {
+      totalRequests[key] += parseInt(p.value.int64Value)
+    })
+  })
+
+  return totalRequests
+}
+
 const CloudVisionTab = () => {
 
   const { state, dispatch } = useContext(MonitoringContext);
@@ -140,28 +165,7 @@ const CloudVisionTab = () => {
   const handlePressSecondary = async () => {
     try {
       let monitorData = await getMetrics()
-      let total = 0
-      let totalRequests = {
-        vision: 0,
-        monitoring: 0
-      }
-      monitorData.timeSeries.map(ts => {
-        let key = ""
-        switch (true) {
-          case ts.resource.labels.service.includes("vision"):
-            key = "vision"
-            break;
-          case ts.resource.labels.service.includes("monitoring"):
-            key = "monitoring"
-            break;
-          default:
-          // do something if myProperty does not contain either "string one" or "string two"
-        }
-        ts.points.forEach(p => {
-          totalRequests[key] += parseInt(p.value.int64Value)
-        })
-      })
-      console.log({ totalRequests })
+      let totalRequests = extractMetricsFromData(monitorData)
       dispatch({ type: "UPDATE_MONITORING", payload: totalRequests })
     } catch (e) {
       alert(e.message)
