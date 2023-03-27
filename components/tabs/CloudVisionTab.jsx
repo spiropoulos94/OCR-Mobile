@@ -97,6 +97,10 @@ const getMetrics = async () => {
 
     let data = await response.json()
 
+    if (data.error && data.error.message) {
+      throw new Error(data.error.message)
+    }
+
     let cloudVisionRequests = 0
 
     data.timeSeries.map(ts => {
