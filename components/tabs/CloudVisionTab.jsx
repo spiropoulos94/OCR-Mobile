@@ -63,7 +63,9 @@ export async function callGoogleVisionAsync(image) {
     },
     body: JSON.stringify(body),
   });
-  const result = await response.json();
+  const data = await response.json();
+
+  return data
 }
 
 const getMetrics = async () => {
@@ -155,6 +157,9 @@ const CloudVisionTab = () => {
       let image = await getImageInBase64()
       if (image) {
         let test = await callGoogleVisionAsync(image)
+        console.log({
+          test
+        })
       }
     } catch (e) {
       alert(e.message)

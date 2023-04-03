@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: 80
+        paddingHorizontal: 80,
+        backgroundColor: "white"
     },
     text: {
         fontWeight: "bold"
