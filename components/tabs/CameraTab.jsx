@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { CLOUD_VISION_API_KEY, API_KEY, API_URL, PROJECT_ID } from "@env"
 import { Button } from "@rneui/base"
 import { useCameraDevices, Camera } from "react-native-vision-camera";
+import { useIsForeground } from "../../hooks/useIsForeground.js"
 
 const LoadingView = () => <View><Text>Loading...</Text></View>
 
@@ -10,6 +11,7 @@ const CameraTab = () => {
 
     const devices = useCameraDevices()
     const device = devices.back
+    const isForeground = useIsForeground()
 
     if (device == null) return <LoadingView />
 
@@ -18,7 +20,7 @@ const CameraTab = () => {
             <Camera
                 style={styles.cameraContainer}
                 device={device}
-                isActive={true}
+                isActive={isForeground}
             />
             <Button style={styles.cameraBtn} title={"Click"}></Button>
         </View>
