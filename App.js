@@ -21,6 +21,7 @@ import ApiInfoHeaderBar from './components/ApiInfoHeaderBar.jsx';
 // contexts
 import { ProductsProvider } from './contexts/products.context';
 import { MonitoringProvider } from './contexts/monitor.context';
+import CameraTab from './components/tabs/CameraTab.jsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,9 @@ function App() {
                 </Tab.Screen>
                 <Tab.Screen name="Cloud Vision API">
                   {() => <CloudVisionTab />}
+                </Tab.Screen>
+                <Tab.Screen name="Camera">
+                  {() => <CameraTab />}
                 </Tab.Screen>
               </>
             ) : (
