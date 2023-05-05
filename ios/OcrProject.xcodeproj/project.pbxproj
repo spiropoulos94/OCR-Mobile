@@ -440,6 +440,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					"VISION_CAMERA_ENABLE_FRAME_PROCESSORS=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = OcrProjectTests/Info.plist;
@@ -509,7 +510,7 @@
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = org.reactjs.native.example.OcrProjectNikos;
 				PRODUCT_NAME = OcrProject;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -535,7 +536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = org.reactjs.native.example.OcrProjectNikos;
 				PRODUCT_NAME = OcrProject;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
