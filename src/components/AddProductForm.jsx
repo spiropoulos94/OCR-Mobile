@@ -1,4 +1,4 @@
-import React, {useState, useRef, useContext} from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {
   View,
   Text,
@@ -13,12 +13,12 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Toast from 'react-native-toast-message';
 import CustomButton from './Button';
-import {ProductsContext} from '../contexts/products.context';
+import { ProductsContext } from '../contexts/products.context';
 import TextRecognition from '@react-native-ml-kit/text-recognition';
 
-import {parseDateFromText, extractDateFromTexts, stringToTimestamp} from '../utils/date';
+import { parseDateFromText, extractDateFromTexts, stringToTimestamp } from '../utils/date';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const showToast = (product, type = 'success') => {
   let text =
@@ -65,7 +65,7 @@ const AddProductForm = () => {
     'file:///Users/nikosspiropoulos/Library/Developer/CoreSimulator/Devices/76618915-A5FE-4706-9C78-9141A7D68297/data/Containers/Data/Application/8792F630-3580-4131-931B-01572F101888/tmp/6A7BA3F4-432E-4CC6-AD6F-BDB87E95FFB1.jpg',
   );
 
-  const {dispatch} = useContext(ProductsContext);
+  const { dispatch } = useContext(ProductsContext);
 
   const handleDateChange = e => {
     setExpDate(new Date(e.nativeEvent.timestamp));
@@ -83,22 +83,18 @@ const AddProductForm = () => {
   };
 
   const selectImageFromLib = async () => {
-    console.clear()
 
     let returnV = await launchImageLibrary(options, res => {
       setImage(res.assets[0].uri);
-      console.log("Setting image as ", res.assets[0].uri)
       return res;
     });
   };
 
   const handlePress = async () => {
-    console.log("Ready to parse imagec => ", img)
     try {
       const result = await TextRecognition.recognize(
         img,
       );
-      console.log({result})
       let totalTexts = [];
       for (let block of result.blocks) {
         // totalText += ' ' + block.text;
@@ -109,17 +105,14 @@ const AddProductForm = () => {
         }
       }
 
-      console.log({totalTexts})
 
-      if(totalTexts && totalTexts.length > 0){
+      if (totalTexts && totalTexts.length > 0) {
         let dates = extractDateFromTexts(totalTexts);
-        if(dates && dates.length > 0){
-          dates.forEach(date => console.log(`Check! ${stringToTimestamp(date)}`));
+        if (dates && dates.length > 0) {
         }
       }
 
     } catch (e) {
-      console.log(e.message);
       alert('Error: Check console');
     }
   };
@@ -168,10 +161,10 @@ const AddProductForm = () => {
         clickFN={() => addToFridge()}
         disabled={productName.length < 1}
       />
-      <Pressable style={{marginTop: 30}}>
+      <Pressable style={{ marginTop: 30 }}>
         <Button onPress={() => handlePress()} title="Toggle OCR" />
       </Pressable>
-      <Pressable style={{marginTop: 30}}>
+      <Pressable style={{ marginTop: 30 }}>
         <Button
           onPress={() => selectImageFromLib()}
           title="Select Image From Library"
